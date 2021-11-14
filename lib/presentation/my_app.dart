@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:messenger/presentation/home/home_screen.dart';
+import 'package:messenger/presentation/home/home_screen_chat_detail.dart';
 import 'package:messenger/presentation/login/login_screen.dart';
 
 class MyApp extends StatefulWidget {
@@ -40,6 +41,7 @@ class MyAppContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -51,6 +53,7 @@ class MyAppContent extends StatelessWidget {
       routes: {
         LoginScreen.routeName: (_) => const LoginScreen(),
         HomeScreen.routeName: (_) => const HomeScreen(),
+        HomeScreenChatDetail.routeName: (_) => const HomeScreenChatDetail(),
       },
     );
   }

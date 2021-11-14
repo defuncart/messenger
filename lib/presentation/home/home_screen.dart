@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:messenger/presentation/login/login_screen.dart';
+import 'package:messenger/presentation/home/home_screen_chat_detail.dart';
+import 'package:messenger/presentation/home/home_screen_chat_list.dart';
+
+@visibleForTesting
+const largeScreenBreakpoint = 440.0;
+
+@visibleForTesting
+bool isLargeScreen(BuildContext context) => MediaQuery.of(context).size.width >= largeScreenBreakpoint;
 
 class HomeScreen extends StatelessWidget {
   static const routeName = 'HomeScreen';
@@ -8,11 +15,22 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-        onPressed: () => Navigator.of(context).pushNamed(LoginScreen.routeName),
-        child: const Text('Ausloggen'),
-      ),
-    );
+    return isLargeScreen(context)
+        ? Row(
+            children: [
+              SizedBox(
+                width: 300,
+                child: HomeScreenChatList(
+                  onChatSelected: (_) {},
+                ),
+              ),
+              const Expanded(
+                child: HomeScreenChatDetail(),
+              ),
+            ],
+          )
+        : HomeScreenChatList(
+            onChatSelected: (_) => Navigator.of(context).pushNamed(HomeScreenChatDetail.routeName),
+          );
   }
 }
