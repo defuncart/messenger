@@ -12,9 +12,12 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: 'stable'
+      # the arb files aren't under source control, generate them
+      - name: Generate arb files
+        run: dart run arb_generator 
       - name: Install packages
         run: flutter pub get
       - name: Lint
         run: flutter analyze
-      - name: Unit tests
+      - name: Tests
         run: flutter test
