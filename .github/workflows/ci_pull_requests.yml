@@ -14,10 +14,16 @@ jobs:
           channel: 'stable'
       # the arb files aren't under source control, generate them
       - name: Generate arb files
-        run: dart run arb_generator 
+        run: dart run arb_generator
       - name: Install packages
         run: flutter pub get
       - name: Lint
         run: flutter analyze
+      - name: Generate coverage helper
+        run: sh bin/test_gather_all_files.sh messenger
       - name: Tests
-        run: flutter test
+        run: flutter test --coverage
+      - name: Publish codecov report
+        uses: codecov/codecov-action@v1
+        with:
+          file: coverage/lcov.info
