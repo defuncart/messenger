@@ -45,5 +45,9 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+# code coverage
+coverage/
+test/coverage_helper_test.dart
+
 # local assets
 assets_dev/l10n/
