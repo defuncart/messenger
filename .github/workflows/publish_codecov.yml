@@ -1,8 +1,11 @@
-name: ci_pull_request
-on: pull_request
+name: publish_codecov
+on:
+  push:
+    branches:
+      - main
 jobs:
-  lint-unit-test:
-    name: Lint + Tests
+  build:
+    name: Generate + Publish Code Coverage Report
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -17,8 +20,6 @@ jobs:
         run: dart run arb_generator
       - name: Install packages
         run: flutter pub get
-      - name: Lint
-        run: flutter analyze
       - name: Generate coverage helper
         run: sh bin/test_gather_all_files.sh messenger
       - name: Tests

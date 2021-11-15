@@ -1,5 +1,7 @@
 # messenger
 
+[![codecov](https://codecov.io/gh/defuncart/messenger/branch/main/graph/badge.svg?token=A4NK1ZBPON)](https://codecov.io/gh/defuncart/messenger)
+
 A messaging application for mobile and desktop.
 
 ## Getting Started
