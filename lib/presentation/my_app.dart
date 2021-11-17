@@ -25,13 +25,23 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> _initApp() async {
     await Firebase.initializeApp();
+
     setState(() => _isInitialized = true);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: _isInitialized ? const MyAppContent() : const SizedBox.shrink(),
+    return _isInitialized ? const MyAppContent() : const MyAppLoading();
+  }
+}
+
+class MyAppLoading extends StatelessWidget {
+  const MyAppLoading({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Material(
+      child: SizedBox.shrink(),
     );
   }
 }
