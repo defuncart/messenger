@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -23,13 +24,24 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> _initApp() async {
+    await Firebase.initializeApp();
+
     setState(() => _isInitialized = true);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: _isInitialized ? const MyAppContent() : const SizedBox.shrink(),
+    return _isInitialized ? const MyAppContent() : const MyAppLoading();
+  }
+}
+
+class MyAppLoading extends StatelessWidget {
+  const MyAppLoading({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Material(
+      child: SizedBox.shrink(),
     );
   }
 }
