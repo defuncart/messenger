@@ -19,6 +19,8 @@ dependencies:
   firebase_storage:
   cloud_firestore:
   get_it:
+  clock:
+  uuid:
 
 dev_dependencies:
   flutter_test:
