@@ -22,3 +22,5 @@ class UserValueObject extends ValueObject with _$UserValueObject {
 }
 
 class UserNotFoundFailure extends Failure {}
+
+class UserCouldNotBeParsedFailure extends Failure {}
