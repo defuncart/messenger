@@ -34,6 +34,8 @@ dev_dependencies:
   build_runner:
   freezed:
   json_serializable:
+  fake_cloud_firestore:
+  mocktail:
 
 flutter:
   uses-material-design: true
