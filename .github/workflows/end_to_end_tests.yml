@@ -39,3 +39,14 @@ jobs:
           xcrun simctl shutdown all
         env:
           FIREBASE_IOSMACOS: ${{ secrets.FIREBASE_IOSMACOS }}
+      - name: Android
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 30
+          arch: x86_64
+          disable-animations: false
+          script: |
+            echo $FIREBASE_ANDROID | base64 --decode > android/app/google-services.json
+            flutter test integration_test
+        env:
+          FIREBASE_ANDROID: ${{ secrets.FIREBASE_ANDROID }}
