@@ -1,0 +1,27 @@
+name: end_to_end_tests
+on: push
+jobs:
+  end-to-end:
+    name: End-to-end Tests
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
+      # the arb files aren't under source control, generate them
+      - name: Generate arb files
+        run: dart run arb_generator
+      - name: Install packages
+        run: flutter pub get
+      - name: macOS
+        run: |
+          flutter config --enable-macos-desktop
+          echo $FIREBASE_IOSMACOS | base64 --decode > macos/Runner/GoogleService-Info.plist
+          cat macos/Runner/GoogleService-Info.plist
+          flutter test integration_test -d macos
+        env:
+          FIREBASE_IOSMACOS: ${{ secrets.FIREBASE_IOSMACOS }}
