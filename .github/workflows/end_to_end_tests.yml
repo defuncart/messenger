@@ -1,5 +1,5 @@
 name: end_to_end_tests
-on: push
+on: pull_request
 jobs:
   end-to-end:
     name: End-to-end Tests
@@ -50,3 +50,10 @@ jobs:
             flutter test integration_test
         env:
           FIREBASE_ANDROID: ${{ secrets.FIREBASE_ANDROID }}
+      - uses: nanasess/setup-chromedriver@v1.0.5
+      - name: Web
+        run: |
+          echo $FIREBASE_WEB | base64 --decode > web/firebase-config.js
+          chromedriver --port=4444 & flutter drive --driver=test_driver/integration_test.dart --target=integration_test/my_app_test.dart -d web-server
+        env:
+          FIREBASE_WEB: ${{ secrets.FIREBASE_WEB }}
