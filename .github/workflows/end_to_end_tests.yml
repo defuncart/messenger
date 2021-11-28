@@ -21,7 +21,21 @@ jobs:
         run: |
           flutter config --enable-macos-desktop
           echo $FIREBASE_IOSMACOS | base64 --decode > macos/Runner/GoogleService-Info.plist
-          cat macos/Runner/GoogleService-Info.plist
           flutter test integration_test -d macos
+        env:
+          FIREBASE_IOSMACOS: ${{ secrets.FIREBASE_IOSMACOS }}
+      - name: Setup iOS
+        uses: futureware-tech/simulator-action@v1
+        id: setup_ios
+        with:
+          # https://github.com/futureware-tech/simulator-action/wiki/Devices-macos-latest
+          model: iPhone 12
+          os_version: 14.4
+          shutdown_after_job: false
+      - name: iOS
+        run: |
+          echo $FIREBASE_IOSMACOS | base64 --decode > ios/Runner/GoogleService-Info.plist
+          flutter test integration_test -d C76E8E62-3C4C-40AB-AEBE-8025835391B1
+          xcrun simctl shutdown all
         env:
           FIREBASE_IOSMACOS: ${{ secrets.FIREBASE_IOSMACOS }}
