@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:messenger/domain/user/entity/user_entity.dart';
+import 'package:messenger/infrastructure/user/dto/user_dto.dart';
 
 /// Wraps [widget] with in [MaterialApp]
 Widget wrapWithMaterialApp(Widget widget) => MaterialApp(home: widget);
@@ -17,3 +19,66 @@ Widget wrapWithMaterialAppLocalizationDelegates(Widget widget) => MaterialApp(
       locale: const Locale('en'),
       home: widget,
     );
+
+/// A test util to create entity instances for testing
+class TestEntities {
+  TestEntities._();
+
+  /// Returns a [UserEntity] model with given overriden parameters
+  static UserEntity user({
+    String? id,
+    String? phoneNumber,
+    String? displayName,
+    String? avatarUrl,
+  }) =>
+      UserEntity.value(
+        TestValueObjects.user(
+          id: id ?? 'id',
+          phoneNumber: phoneNumber ?? 'phoneNumber',
+          displayName: displayName ?? 'displayName',
+          avatarUrl: avatarUrl,
+        ),
+      );
+}
+
+/// A test util to create value object instances for testing
+class TestValueObjects {
+  TestValueObjects._();
+
+  /// Returns a [UserValueObject] model with given overriden parameters
+  static UserValueObject user({
+    String? id,
+    String? phoneNumber,
+    String? displayName,
+    String? avatarUrl,
+  }) =>
+      UserValueObject(
+        id: id ?? 'id',
+        phoneNumber: phoneNumber ?? 'phoneNumber',
+        displayName: displayName ?? 'displayName',
+        avatarUrl: avatarUrl,
+      );
+}
+
+/// A test util to create dto instances for testing
+class TestDtos {
+  TestDtos._();
+
+  /// Returns a [UserDto] model with given overriden parameters
+  static UserDto user({
+    String? id,
+    String? phoneNumber,
+    String? displayName,
+    String? avatarUrl,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) =>
+      UserDto(
+        id: id ?? 'id',
+        phoneNumber: phoneNumber ?? 'phoneNumber',
+        displayName: displayName ?? 'displayName',
+        avatarUrl: avatarUrl,
+        createdAt: createdAt ?? DateTime(1),
+        updatedAt: updatedAt ?? DateTime(1),
+      );
+}

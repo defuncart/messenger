@@ -1,5 +1,5 @@
 PODS:
-  - cloud_firestore (3.1.0):
+  - cloud_firestore (2.5.4):
     - Firebase/Firestore (= 8.9.0)
     - firebase_core
     - Flutter
@@ -125,7 +125,7 @@ CHECKOUT OPTIONS:
     :tag: 8.9.1
 
 SPEC CHECKSUMS:
-  cloud_firestore: 2cff0618e560f435fc05da5c94c2d213eb7ba640
+  cloud_firestore: 0c744725c0d1544d77db2c8eb35ef919cb19a176
   Firebase: 13d8d96499e2635428d5bf0ec675df21f95d9a95
   firebase_auth: 0d56cc4d105ff70d1547a7fcb10ee574ad05adf5
   firebase_core: f770e033e790657b3505f04be4cb24c482912f11
