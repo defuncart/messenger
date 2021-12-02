@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:messenger/presentation/home/home_screen.dart';
+import 'package:messenger/presentation/auth/auth_screen_view_model.dart';
+import 'package:messenger/presentation/auth/widgets/sms_code_auth_panel.dart';
+import 'package:provider/provider.dart';
 
 class AuthScreen extends StatelessWidget {
   static const routeName = 'AuthScreen';
@@ -8,11 +10,38 @@ class AuthScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => AuthScreenViewModel(),
+      builder: (context, _) => Consumer<AuthScreenViewModel>(
+        builder: (context, viewModel, _) => AuthScreenContent(
+          viewModel: viewModel,
+        ),
+      ),
+    );
+  }
+}
+
+class AuthScreenContent extends StatelessWidget {
+  const AuthScreenContent({
+    required this.viewModel,
+    Key? key,
+  }) : super(key: key);
+
+  final AuthScreenViewModel viewModel;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ElevatedButton(
-          onPressed: () => Navigator.of(context).pushReplacementNamed(HomeScreen.routeName),
-          child: const Text('Einloggen'),
+        child: Builder(
+          builder: (context) {
+            switch (viewModel.state) {
+              case AuthScreenState.phoneNumber:
+                return PhoneNumberAuthPanel();
+              case AuthScreenState.smsCode:
+                return const SMSCodeAuthPanel();
+            }
+          },
         ),
       ),
     );

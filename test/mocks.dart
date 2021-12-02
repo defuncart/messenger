@@ -4,9 +4,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_test/src/deprecated.dart';
 import 'package:messenger/common/repositories/date_time/date_time_generator.dart';
+import 'package:messenger/presentation/auth/auth_screen_view_model.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockDateTimeGenerator extends Mock implements DateTimeGenerator {}
+
+class MockAuthScreenViewModel extends Mock implements AuthScreenViewModel {}
 
 class MethodChannelMocks {
   // taken from https://github.com/FirebaseExtended/flutterfire/blob/master/packages/firebase_auth/firebase_auth/test/mock.dart
