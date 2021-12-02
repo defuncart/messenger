@@ -1,3 +1,6 @@
-key;description;en
-title;A test key;Messenger
-test;A test key;Hello World
+key;description;en;de
+appTitle;A test key;Messenger;Messenger
+generalContinue;Continue;Continue;Weiter
+authScreenPhoneNumberPanelSubtitleText;Subtitle on phone number input;Welcome;Willkommen
+authScreenPhoneNumberPanelHintText;Hint text for input field;Phone Number;Telefonnummer
+authScreenPhoneNumberPanelErrorText;Error text when number is not valid;Invalid phone number;Ungültige Telefonnummer
