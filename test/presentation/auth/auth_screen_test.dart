@@ -21,7 +21,7 @@ void main() {
     });
 
     setUpUI((tester) async {
-      final widget = wrapWithMaterialApp(
+      final widget = wrapWithMaterialAppLocalizationDelegates(
         AuthScreenContent(
           viewModel: mockViewModel,
         ),
