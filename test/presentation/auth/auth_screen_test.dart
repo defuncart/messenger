@@ -15,6 +15,8 @@ void main() {
 
     setUp(() {
       mockViewModel = MockAuthScreenViewModel();
+
+      when(() => mockViewModel.phoneNumberIsInvalid).thenReturn(false);
     });
 
     setUpUI((tester) async {

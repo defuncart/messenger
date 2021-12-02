@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:messenger/presentation/auth/auth_screen_view_model.dart';
+import 'package:messenger/presentation/auth/widgets/phone_number_auth_panel.dart';
 import 'package:messenger/presentation/auth/widgets/sms_code_auth_panel.dart';
 import 'package:provider/provider.dart';
 
@@ -37,7 +39,12 @@ class AuthScreenContent extends StatelessWidget {
           builder: (context) {
             switch (viewModel.state) {
               case AuthScreenState.phoneNumber:
-                return PhoneNumberAuthPanel();
+                return PhoneNumberAuthPanel(
+                  onPhoneNumberSubmitted: viewModel.onPhoneNumberSubmitted,
+                  error: viewModel.phoneNumberIsInvalid
+                      ? AppLocalizations.of(context)!.authScreenPhoneNumberPanelErrorText
+                      : null,
+                );
               case AuthScreenState.smsCode:
                 return const SMSCodeAuthPanel();
             }
