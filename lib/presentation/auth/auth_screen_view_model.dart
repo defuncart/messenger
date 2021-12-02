@@ -17,6 +17,9 @@ class AuthScreenViewModel extends ChangeNotifier {
   var _state = AuthScreenState.phoneNumber;
   AuthScreenState get state => _state;
 
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+
   bool _phoneNumberIsInvalid = false;
   bool get phoneNumberIsInvalid => _phoneNumberIsInvalid;
 
@@ -24,6 +27,7 @@ class AuthScreenViewModel extends ChangeNotifier {
     print('onPhoneNumberSubmitted');
 
     _phoneNumberIsInvalid = false;
+    _isLoading = true;
     notifyListeners();
 
     final fullPhoneNumber = PhoneNumberUtils.combine(countryCode: countryCode, phoneNumber: phoneNumber);
@@ -34,6 +38,7 @@ class AuthScreenViewModel extends ChangeNotifier {
       _phoneNumberIsInvalid = true;
     }
 
+    _isLoading = false;
     notifyListeners();
   }
 }

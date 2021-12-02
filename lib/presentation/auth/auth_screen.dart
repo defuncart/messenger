@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
+import 'package:messenger/common/widgets/modal_progress_indicator.dart';
 import 'package:messenger/presentation/auth/auth_screen_view_model.dart';
 import 'package:messenger/presentation/auth/widgets/phone_number_auth_panel.dart';
 import 'package:messenger/presentation/auth/widgets/sms_code_auth_panel.dart';
@@ -37,6 +38,14 @@ class AuthScreenContent extends StatelessWidget {
       body: Center(
         child: Builder(
           builder: (context) {
+            if (viewModel.isLoading) {
+              Future.microtask(
+                () => ModalProgressIndicator.show(context),
+              );
+            } else {
+              ModalProgressIndicator.hide();
+            }
+
             switch (viewModel.state) {
               case AuthScreenState.phoneNumber:
                 return PhoneNumberAuthPanel(
