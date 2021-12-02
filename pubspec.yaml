@@ -23,6 +23,8 @@ dependencies:
   uuid:
   freezed_annotation:
   json_annotation: ^4.3.0
+  provider:
+  gap:
 
 dev_dependencies:
   flutter_test:
@@ -36,6 +38,7 @@ dev_dependencies:
   json_serializable:
   fake_cloud_firestore:
   mocktail:
+  flutter_test_ui:
 
 flutter:
   uses-material-design: true
