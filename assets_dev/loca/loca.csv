@@ -4,3 +4,5 @@ generalContinue;Continue;Continue;Weiter
 authScreenPhoneNumberPanelSubtitleText;Subtitle on phone number input;Welcome;Willkommen
 authScreenPhoneNumberPanelHintText;Hint text for input field;Phone Number;Telefonnummer
 authScreenPhoneNumberPanelErrorText;Error text when number is not valid;Invalid phone number;Ungültige Telefonnummer
+authScreenSmsCodePanelTitleText;Title on sms code panel;Enter Code;Code eingeben
+authScreenSmsCodePanelNoCodeReceiveButtonText;Buttontext when no code received;No code received?;Keinen Code erhalten?
