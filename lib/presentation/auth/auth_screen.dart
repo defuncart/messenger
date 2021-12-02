@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:messenger/presentation/home/home_screen.dart';
 
-class LoginScreen extends StatelessWidget {
-  static const routeName = 'LoginScreen';
+class AuthScreen extends StatelessWidget {
+  static const routeName = 'AuthScreen';
 
-  const LoginScreen({Key? key}) : super(key: key);
+  const AuthScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

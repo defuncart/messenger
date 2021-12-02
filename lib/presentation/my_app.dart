@@ -2,9 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:messenger/presentation/auth/auth_screen.dart';
 import 'package:messenger/presentation/home/home_screen.dart';
 import 'package:messenger/presentation/home/home_screen_chat_detail.dart';
-import 'package:messenger/presentation/login/login_screen.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -61,9 +61,9 @@ class MyAppContent extends StatelessWidget {
         AppLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      initialRoute: LoginScreen.routeName,
+      initialRoute: AuthScreen.routeName,
       routes: {
-        LoginScreen.routeName: (_) => const LoginScreen(),
+        AuthScreen.routeName: (_) => const AuthScreen(),
         HomeScreen.routeName: (_) => const HomeScreen(),
         HomeScreenChatDetail.routeName: (_) => const HomeScreenChatDetail(),
       },
