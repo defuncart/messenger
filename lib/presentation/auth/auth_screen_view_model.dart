@@ -28,6 +28,9 @@ class AuthScreenViewModel extends ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
+  bool _shouldPrefilPhoneNumber = false;
+  String? get phoneNumberPreFill => _shouldPrefilPhoneNumber ? _phoneNumber : null;
+
   bool _phoneNumberIsInvalid = false;
   bool get phoneNumberIsInvalid => _phoneNumberIsInvalid;
 
@@ -41,6 +44,7 @@ class AuthScreenViewModel extends ChangeNotifier {
     _countryCode = countryCode;
     _phoneNumber = phoneNumber;
 
+    _shouldPrefilPhoneNumber = false;
     _phoneNumberIsInvalid = false;
     _isLoading = true;
     notifyListeners();
@@ -72,6 +76,7 @@ class AuthScreenViewModel extends ChangeNotifier {
 
   void onChangeNumber() {
     _state = AuthScreenState.phoneNumber;
+    _shouldPrefilPhoneNumber = true;
     notifyListeners();
   }
 }

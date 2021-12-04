@@ -9,11 +9,13 @@ class PhoneNumberAuthPanel extends StatefulWidget {
   const PhoneNumberAuthPanel({
     required this.onPhoneNumberSubmitted,
     this.error,
+    this.initialPhoneNumber,
     Key? key,
   }) : super(key: key);
 
   final OnPhoneNumberSubmitted onPhoneNumberSubmitted;
   final String? error;
+  final String? initialPhoneNumber;
 
   @visibleForTesting
   static const countryCode = '+49';
@@ -32,7 +34,7 @@ class _PhoneNumberAuthPanelState extends State<PhoneNumberAuthPanel> {
   void initState() {
     super.initState();
 
-    _controller = TextEditingController()
+    _controller = TextEditingController(text: widget.initialPhoneNumber)
       ..addListener(() {
         final canSubmit = _controller.text.isNotEmpty;
         if (canSubmit != _canSubmit) {

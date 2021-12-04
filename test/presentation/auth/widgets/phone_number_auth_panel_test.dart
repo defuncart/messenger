@@ -18,7 +18,7 @@ void main() {
 
     group('when first shown', () {
       setUpUI((tester) async {
-        final widget = wrapWithMaterialApp(
+        final widget = wrapWithMaterialAppLocalizationDelegates(
           Scaffold(
             body: PhoneNumberAuthPanel(
               onPhoneNumberSubmitted: mockOnPhoneNumberSubmitted,
@@ -97,6 +97,48 @@ void main() {
             expect(textField.focusNode!.hasFocus, isFalse);
           });
         });
+      });
+    });
+
+    group('when an error is given', () {
+      const error = 'error';
+
+      setUpUI((tester) async {
+        final widget = wrapWithMaterialAppLocalizationDelegates(
+          Scaffold(
+            body: PhoneNumberAuthPanel(
+              onPhoneNumberSubmitted: (_, __) {},
+              error: error,
+            ),
+          ),
+        );
+        await tester.pumpWidget(widget);
+        await tester.pumpAndSettle();
+      });
+
+      testUI('expect that error is displayed', (tester) async {
+        expect(find.text(error), findsOneWidget);
+      }, skip: true);
+    });
+
+    group('when an initial phone number is given', () {
+      const phoneNumber = 'phoneNumber';
+
+      setUpUI((tester) async {
+        final widget = wrapWithMaterialAppLocalizationDelegates(
+          Scaffold(
+            body: PhoneNumberAuthPanel(
+              onPhoneNumberSubmitted: (_, __) {},
+              initialPhoneNumber: phoneNumber,
+            ),
+          ),
+        );
+        await tester.pumpWidget(widget);
+        await tester.pumpAndSettle();
+      });
+
+      testUI('expect that number is displayed', (tester) async {
+        expect(find.text(phoneNumber), findsOneWidget);
       });
     });
   });

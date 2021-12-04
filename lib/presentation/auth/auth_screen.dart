@@ -54,6 +54,7 @@ class AuthScreenContent extends StatelessWidget {
                   error: viewModel.phoneNumberIsInvalid
                       ? AppLocalizations.of(context)!.authScreenPhoneNumberPanelErrorText
                       : null,
+                  initialPhoneNumber: viewModel.phoneNumberPreFill,
                 );
               case AuthScreenState.smsCode:
                 return SMSCodeAuthPanel(
