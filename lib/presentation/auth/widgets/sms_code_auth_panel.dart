@@ -4,7 +4,18 @@ import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:gap/gap.dart';
 
 class SMSCodeAuthPanel extends StatefulWidget {
-  const SMSCodeAuthPanel({Key? key}) : super(key: key);
+  const SMSCodeAuthPanel({
+    required this.phoneNumber,
+    required this.onCodeSubmitted,
+    required this.onResendCode,
+    required this.onChangeNumber,
+    Key? key,
+  }) : super(key: key);
+
+  final String phoneNumber;
+  final void Function(String) onCodeSubmitted;
+  final VoidCallback onResendCode;
+  final VoidCallback onChangeNumber;
 
   @override
   State<SMSCodeAuthPanel> createState() => _SMSCodeAuthPanelState();
@@ -24,6 +35,19 @@ class _SMSCodeAuthPanelState extends State<SMSCodeAuthPanel> {
           style: Theme.of(context).textTheme.headline4,
         ),
         const Gap(32),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(widget.phoneNumber),
+            TextButton(
+              onPressed: widget.onChangeNumber,
+              child: Text(
+                AppLocalizations.of(context)!.generalEdit,
+              ),
+            ),
+          ],
+        ),
+        const Gap(8),
         DigitTextFields(
           count: 6,
           onChanged: (allDigitsFilled, text) => setState(() {
@@ -34,16 +58,16 @@ class _SMSCodeAuthPanelState extends State<SMSCodeAuthPanel> {
         const Gap(16),
         TextButton(
           child: Text(
-            AppLocalizations.of(context)!.authScreenSmsCodePanelNoCodeReceiveButtonText,
+            AppLocalizations.of(context)!.authScreenSmsCodePanelResendCodeButtonText,
           ),
-          onPressed: () {},
+          onPressed: widget.onResendCode,
         ),
         const Gap(32),
         ElevatedButton(
           child: Text(
             AppLocalizations.of(context)!.generalContinue,
           ),
-          onPressed: _canSubmit ? () {} : null,
+          onPressed: _canSubmit ? () => widget.onCodeSubmitted(_smsCode) : null,
         ),
       ],
     );
@@ -114,7 +138,6 @@ class _DigitTextFieldsState extends State<DigitTextFields> {
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         for (var i = 0; i < widget.count; i++) ...[
           DigitTextField(

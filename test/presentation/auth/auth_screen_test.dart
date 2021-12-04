@@ -44,6 +44,7 @@ void main() {
     group('when viewMode state is ${AuthScreenState.smsCode}', () {
       setUp(() {
         when(() => mockViewModel.state).thenReturn(AuthScreenState.smsCode);
+        when(() => mockViewModel.phoneNumberWithCountryCode).thenReturn('');
       });
 
       testUI('then expect $SMSCodeAuthPanel', (tester) async {

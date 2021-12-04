@@ -7,11 +7,18 @@ import '../../../test_utils.dart';
 
 void main() {
   group('$SMSCodeAuthPanel', () {
+    const phoneNumber = 'phoneNumber';
+
     group('when first shown', () {
       setUpUI((tester) async {
         final widget = wrapWithMaterialAppLocalizationDelegates(
-          const Scaffold(
-            body: SMSCodeAuthPanel(),
+          Scaffold(
+            body: SMSCodeAuthPanel(
+              phoneNumber: phoneNumber,
+              onCodeSubmitted: (_) {},
+              onResendCode: () {},
+              onChangeNumber: () {},
+            ),
           ),
         );
         await tester.pumpWidget(widget);
@@ -20,9 +27,10 @@ void main() {
 
       testUI('expect correct widget tree', (tester) async {
         expect(find.text('Enter Code'), findsOneWidget);
+        expect(find.text(phoneNumber), findsOneWidget);
         expect(find.byType(DigitTextFields), findsOneWidget);
-        expect(find.byType(TextButton), findsOneWidget);
-        expect(find.text('No code received?'), findsOneWidget);
+        expect(find.byType(TextButton), findsNWidgets(2));
+        expect(find.text('Resend code'), findsOneWidget);
         expect(find.byType(ElevatedButton), findsOneWidget);
         expect(find.text('Continue'), findsOneWidget);
       });
