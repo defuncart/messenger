@@ -141,6 +141,7 @@ class _DigitTextFieldsState extends State<DigitTextFields> {
       children: [
         for (var i = 0; i < widget.count; i++) ...[
           DigitTextField(
+            key: Key('DigitTextField$i'),
             controller: _controllers[i],
             focusNode: _focusNodes[i],
             previousFocusNode: i > 0 ? _focusNodes[i - 1] : null,
