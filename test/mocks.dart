@@ -4,9 +4,25 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_test/src/deprecated.dart';
 import 'package:messenger/common/repositories/date_time/date_time_generator.dart';
+import 'package:messenger/domain/auth/use_cases/resend_sms_code_use_case.dart';
+import 'package:messenger/domain/auth/use_cases/verify_phone_number_use_case.dart';
+import 'package:messenger/domain/auth/use_cases/verify_sms_code_use_case.dart';
+import 'package:messenger/presentation/auth/auth_screen_view_model.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockDateTimeGenerator extends Mock implements DateTimeGenerator {}
+
+class MockAuthScreenViewModel extends Mock implements AuthScreenViewModel {}
+
+class MockVerifyPhoneNumberUseCase extends Mock implements VerifyPhoneNumberUseCase {}
+
+class MockResendSMSCodeUseCase extends Mock implements ResendSMSCodeUseCase {}
+
+class MockVerifySMSCodeUseCase extends Mock implements VerifySMSCodeUseCase {}
+
+class MockVoidCallback<T1, T2> extends Mock {
+  void call([T1 arg1, T2 arg2]);
+}
 
 class MethodChannelMocks {
   // taken from https://github.com/FirebaseExtended/flutterfire/blob/master/packages/firebase_auth/firebase_auth/test/mock.dart

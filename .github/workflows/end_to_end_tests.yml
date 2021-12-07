@@ -1,5 +1,8 @@
 name: end_to_end_tests
-on: pull_request
+on: 
+  pull_request:
+    branches:
+      - bla
 jobs:
   end-to-end:
     name: End-to-end Tests
