@@ -2,22 +2,29 @@ import 'package:firebase_core_platform_interface/firebase_core_platform_interfac
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:messenger/common/repositories/date_time/date_time_generator.dart';
+import 'package:messenger/domain/auth/auth_repository.dart';
 import 'package:messenger/domain/auth/use_cases/resend_sms_code_use_case.dart';
 import 'package:messenger/domain/auth/use_cases/verify_phone_number_use_case.dart';
 import 'package:messenger/domain/auth/use_cases/verify_sms_code_use_case.dart';
 import 'package:messenger/presentation/auth/auth_screen_view_model.dart';
 import 'package:mocktail/mocktail.dart';
 
+// repositories
+class MockAuthRepository extends Mock implements AuthRepository {}
+
 class MockDateTimeGenerator extends Mock implements DateTimeGenerator {}
 
+// view models
 class MockAuthScreenViewModel extends Mock implements AuthScreenViewModel {}
 
+// use cases
 class MockVerifyPhoneNumberUseCase extends Mock implements VerifyPhoneNumberUseCase {}
 
 class MockResendSMSCodeUseCase extends Mock implements ResendSMSCodeUseCase {}
 
 class MockVerifySMSCodeUseCase extends Mock implements VerifySMSCodeUseCase {}
 
+// functions
 class MockVoidCallback<T1, T2> extends Mock {
   void call([T1 arg1, T2 arg2]);
 }
