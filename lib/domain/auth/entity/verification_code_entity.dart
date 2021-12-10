@@ -5,7 +5,7 @@ import 'package:messenger/common/entities/value_object.dart';
 
 part 'verification_code_entity.freezed.dart';
 
-class VerificationCodeEntity extends Entity {
+class VerificationCodeEntity extends Entity<VerificationCodeValueObject> {
   const VerificationCodeEntity.value(VerificationCodeValueObject value) : super.value(value);
 
   const VerificationCodeEntity.failure(Failure failure) : super.failure(failure);

@@ -4,9 +4,9 @@ import 'package:meta/meta.dart';
 
 /// An [Entity] which either contains a [value] or a [failure]
 @immutable
-abstract class Entity {
+abstract class Entity<T extends ValueObject> {
   /// Creates an [Entity] with [value]
-  const Entity.value(ValueObject value)
+  const Entity.value(T value)
       : hasValue = true,
         _value = value,
         _failure = null;
@@ -23,7 +23,7 @@ abstract class Entity {
   /// The entity's value
   ///
   /// Throws when the entity has no value
-  ValueObject get value {
+  T get value {
     if (!hasValue) {
       throw StateError('Entity $this has no value');
     }
@@ -31,7 +31,7 @@ abstract class Entity {
     return _value!;
   }
 
-  final ValueObject? _value;
+  final T? _value;
 
   /// The entity's failure
   ///

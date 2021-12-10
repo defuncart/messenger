@@ -5,7 +5,7 @@ import 'package:messenger/common/entities/value_object.dart';
 
 part 'auth_entity.freezed.dart';
 
-class AuthEntity extends Entity {
+class AuthEntity extends Entity<AuthValueObject> {
   const AuthEntity.value(AuthValueObject value) : super.value(value);
 
   const AuthEntity.failure(Failure failure) : super.failure(failure);
