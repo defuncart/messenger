@@ -1,8 +1,6 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_test/src/deprecated.dart';
 import 'package:messenger/common/repositories/date_time/date_time_generator.dart';
 import 'package:messenger/domain/auth/use_cases/resend_sms_code_use_case.dart';
 import 'package:messenger/domain/auth/use_cases/verify_phone_number_use_case.dart';
