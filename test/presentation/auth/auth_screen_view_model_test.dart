@@ -1,8 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:messenger/domain/auth/entity/verification_code_entity.dart';
 import 'package:messenger/presentation/auth/auth_screen_view_model.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../mocks.dart';
+import '../../test_utils.dart';
 
 void main() {
   group('$AuthScreenViewModel', () {
@@ -29,7 +31,8 @@ void main() {
 
       group('when number is valid', () {
         setUp(() {
-          when(() => mockVerifyPhoneNumberUseCase.call(any())).thenAnswer((_) => Future.value(true));
+          when(() => mockVerifyPhoneNumberUseCase.call(any()))
+              .thenAnswer((_) => Future.value(TestEntities.verificationCode()));
         });
 
         test('then expect state is ${AuthScreenState.smsCode}', () async {
@@ -41,7 +44,8 @@ void main() {
 
       group('when number is invalid', () {
         setUp(() {
-          when(() => mockVerifyPhoneNumberUseCase.call(any())).thenAnswer((_) => Future.value(false));
+          when(() => mockVerifyPhoneNumberUseCase.call(any()))
+              .thenAnswer((_) => Future.value(VerificationCodeEntity.failure(VerificationCodeFailure())));
         });
 
         test('then expect state is ${AuthScreenState.phoneNumber}', () async {
@@ -50,62 +54,65 @@ void main() {
           verify(() => mockVerifyPhoneNumberUseCase.call('+4915289763484'));
         });
       });
+    });
 
-      group('onCodeSubmitted', () {
-        const smsCode = 'smsCode';
+    group('onCodeSubmitted', () {
+      const smsCode = 'smsCode';
+      const verificationId = '';
 
-        group('when code is valid', () {
-          setUp(() {
-            when(() => mockVerifySMSCodeUseCase.call(smsCode)).thenAnswer((_) => Future.value(true));
-          });
-
-          test('then expect true returned', () async {
-            expect(await viewModel.onCodeSubmitted('smsCode'), isTrue);
-            verify(() => mockVerifySMSCodeUseCase.call(smsCode));
-          });
+      group('when code is valid', () {
+        setUp(() {
+          when(() => mockVerifySMSCodeUseCase.call(verificationId: verificationId, smsCode: smsCode))
+              .thenAnswer((_) => Future.value(TestEntities.auth(authenticatedSuccessfully: true)));
         });
 
-        group('when code is invalid', () {
-          setUp(() {
-            when(() => mockVerifySMSCodeUseCase.call(smsCode)).thenAnswer((_) => Future.value(false));
-          });
-
-          test('then expect false returned', () async {
-            expect(await viewModel.onCodeSubmitted('smsCode'), isFalse);
-            verify(() => mockVerifySMSCodeUseCase.call(smsCode));
-          });
+        test('then expect true returned', () async {
+          expect(await viewModel.onCodeSubmitted('smsCode'), isTrue);
+          verify(() => mockVerifySMSCodeUseCase.call(verificationId: verificationId, smsCode: smsCode));
         });
       });
 
-      group('onResendCode', () {
-        group('when code is resent', () {
-          setUp(() {
-            when(() => mockResendSMSCodeUseCase.call()).thenAnswer((_) => Future.value(true));
-          });
-
-          test('then expect true returned', () async {
-            expect(await viewModel.onResendCode(), isTrue);
-            verify(() => mockResendSMSCodeUseCase.call());
-          });
+      group('when code is invalid', () {
+        setUp(() {
+          when(() => mockVerifySMSCodeUseCase.call(verificationId: verificationId, smsCode: smsCode))
+              .thenAnswer((_) => Future.value(TestEntities.auth(authenticatedSuccessfully: false)));
         });
 
-        group('when code is not resent', () {
-          setUp(() {
-            when(() => mockResendSMSCodeUseCase.call()).thenAnswer((_) => Future.value(false));
-          });
+        test('then expect false returned', () async {
+          expect(await viewModel.onCodeSubmitted('smsCode'), isFalse);
+          verify(() => mockVerifySMSCodeUseCase.call(verificationId: verificationId, smsCode: smsCode));
+        });
+      });
+    });
 
-          test('then expect true returned', () async {
-            expect(await viewModel.onResendCode(), isFalse);
-            verify(() => mockResendSMSCodeUseCase.call());
-          });
+    group('onResendCode', () {
+      group('when code is resent', () {
+        setUp(() {
+          when(() => mockResendSMSCodeUseCase.call()).thenAnswer((_) => Future.value(true));
+        });
+
+        test('then expect true returned', () async {
+          expect(await viewModel.onResendCode(), isTrue);
+          verify(() => mockResendSMSCodeUseCase.call());
         });
       });
 
-      group('onChangeNumber', () {
-        test('expect state is ${AuthScreenState.phoneNumber}', () {
-          viewModel.onChangeNumber();
-          expect(viewModel.state, AuthScreenState.phoneNumber);
+      group('when code is not resent', () {
+        setUp(() {
+          when(() => mockResendSMSCodeUseCase.call()).thenAnswer((_) => Future.value(false));
         });
+
+        test('then expect true returned', () async {
+          expect(await viewModel.onResendCode(), isFalse);
+          verify(() => mockResendSMSCodeUseCase.call());
+        });
+      });
+    });
+
+    group('onChangeNumber', () {
+      test('expect state is ${AuthScreenState.phoneNumber}', () {
+        viewModel.onChangeNumber();
+        expect(viewModel.state, AuthScreenState.phoneNumber);
       });
     });
   });

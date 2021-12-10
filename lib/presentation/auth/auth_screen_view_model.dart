@@ -14,8 +14,8 @@ class AuthScreenViewModel extends ChangeNotifier {
     VerifyPhoneNumberUseCase? verifyPhoneNumberUseCase,
     VerifySMSCodeUseCase? verifySMSCodeUseCase,
     ResendSMSCodeUseCase? resendSMSCodeUseCase,
-  })  : _verifyPhoneNumberUseCase = verifyPhoneNumberUseCase ?? const VerifyPhoneNumberUseCase(),
-        _verifySMSCodeUseCase = verifySMSCodeUseCase ?? const VerifySMSCodeUseCase(),
+  })  : _verifyPhoneNumberUseCase = verifyPhoneNumberUseCase ?? VerifyPhoneNumberUseCase(),
+        _verifySMSCodeUseCase = verifySMSCodeUseCase ?? VerifySMSCodeUseCase(),
         _resendSMSCodeUseCase = resendSMSCodeUseCase ?? const ResendSMSCodeUseCase();
 
   final VerifyPhoneNumberUseCase _verifyPhoneNumberUseCase;
@@ -37,6 +37,8 @@ class AuthScreenViewModel extends ChangeNotifier {
   String _countryCode = '';
   String _phoneNumber = '';
 
+  var _verificationId = '';
+
   String get phoneNumberWithCountryCode =>
       PhoneNumberUtils.combine(countryCode: _countryCode, phoneNumber: _phoneNumber);
 
@@ -50,7 +52,8 @@ class AuthScreenViewModel extends ChangeNotifier {
     notifyListeners();
 
     final result = await _verifyPhoneNumberUseCase(phoneNumberWithCountryCode);
-    if (result) {
+    if (result.hasValue) {
+      _verificationId = result.value.id;
       _state = AuthScreenState.smsCode;
     } else {
       _phoneNumberIsInvalid = true;
@@ -64,12 +67,15 @@ class AuthScreenViewModel extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    final success = await _verifySMSCodeUseCase(smsCode);
+    final result = await _verifySMSCodeUseCase(
+      verificationId: _verificationId,
+      smsCode: smsCode,
+    );
 
     _isLoading = false;
     notifyListeners();
 
-    return success;
+    return result.hasValue && result.value.authenticatedSuccessfully;
   }
 
   Future<bool> onResendCode() => _resendSMSCodeUseCase();
