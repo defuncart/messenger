@@ -191,6 +191,7 @@ class DigitTextField extends StatelessWidget {
           controller: controller,
           maxLength: 1,
           focusNode: focusNode,
+          keyboardType: TextInputType.number,
           inputFormatters: <TextInputFormatter>[
             FilteringTextInputFormatter.digitsOnly,
           ],
