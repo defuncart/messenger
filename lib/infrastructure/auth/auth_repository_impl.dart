@@ -14,6 +14,9 @@ class AuthRepositoryImpl implements AuthRepository {
   final FirebaseAuth _firebaseAuth;
 
   @override
+  bool get isUserAuthenticated => _firebaseAuth.currentUser != null;
+
+  @override
   Future<VerificationCodeEntity> requestVerificationCode({required String phoneNumber}) async {
     if (Platform.isIOS || Platform.isAndroid) {
       return _requestVerificationCodeMobile(phoneNumber: phoneNumber);
@@ -70,4 +73,7 @@ class AuthRepositoryImpl implements AuthRepository {
       return AuthEntity.failure(AuthFailure());
     }
   }
+
+  @override
+  Future<void> signout() => _firebaseAuth.signOut();
 }
