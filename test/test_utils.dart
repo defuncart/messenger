@@ -84,9 +84,11 @@ class TestValueObjects {
   /// Returns a [VerificationCodeValueObject] model with given overriden parameters
   static VerificationCodeValueObject verificationCode({
     String? id,
+    int? resendToken,
   }) =>
       VerificationCodeValueObject(
         id: id ?? 'id',
+        resendToken: resendToken ?? 0,
       );
 
   /// Returns a [AuthValueObject] model with given overriden parameters

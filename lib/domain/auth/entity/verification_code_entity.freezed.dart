@@ -17,9 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$VerificationCodeValueObjectTearOff {
   const _$VerificationCodeValueObjectTearOff();
 
-  _VerificationCodeValueObject call({required String id}) {
+  _VerificationCodeValueObject call(
+      {required String id, required int resendToken}) {
     return _VerificationCodeValueObject(
       id: id,
+      resendToken: resendToken,
     );
   }
 }
@@ -30,6 +32,7 @@ const $VerificationCodeValueObject = _$VerificationCodeValueObjectTearOff();
 /// @nodoc
 mixin _$VerificationCodeValueObject {
   String get id => throw _privateConstructorUsedError;
+  int get resendToken => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $VerificationCodeValueObjectCopyWith<VerificationCodeValueObject>
@@ -42,7 +45,7 @@ abstract class $VerificationCodeValueObjectCopyWith<$Res> {
           VerificationCodeValueObject value,
           $Res Function(VerificationCodeValueObject) then) =
       _$VerificationCodeValueObjectCopyWithImpl<$Res>;
-  $Res call({String id});
+  $Res call({String id, int resendToken});
 }
 
 /// @nodoc
@@ -57,12 +60,17 @@ class _$VerificationCodeValueObjectCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? resendToken = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      resendToken: resendToken == freezed
+          ? _value.resendToken
+          : resendToken // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -75,7 +83,7 @@ abstract class _$VerificationCodeValueObjectCopyWith<$Res>
           $Res Function(_VerificationCodeValueObject) then) =
       __$VerificationCodeValueObjectCopyWithImpl<$Res>;
   @override
-  $Res call({String id});
+  $Res call({String id, int resendToken});
 }
 
 /// @nodoc
@@ -94,12 +102,17 @@ class __$VerificationCodeValueObjectCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? resendToken = freezed,
   }) {
     return _then(_VerificationCodeValueObject(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      resendToken: resendToken == freezed
+          ? _value.resendToken
+          : resendToken // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -107,14 +120,17 @@ class __$VerificationCodeValueObjectCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_VerificationCodeValueObject implements _VerificationCodeValueObject {
-  const _$_VerificationCodeValueObject({required this.id});
+  const _$_VerificationCodeValueObject(
+      {required this.id, required this.resendToken});
 
   @override
   final String id;
+  @override
+  final int resendToken;
 
   @override
   String toString() {
-    return 'VerificationCodeValueObject(id: $id)';
+    return 'VerificationCodeValueObject(id: $id, resendToken: $resendToken)';
   }
 
   @override
@@ -122,11 +138,16 @@ class _$_VerificationCodeValueObject implements _VerificationCodeValueObject {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _VerificationCodeValueObject &&
-            (identical(other.id, id) || other.id == id));
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality()
+                .equals(other.resendToken, resendToken));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(resendToken));
 
   @JsonKey(ignore: true)
   @override
@@ -137,11 +158,14 @@ class _$_VerificationCodeValueObject implements _VerificationCodeValueObject {
 
 abstract class _VerificationCodeValueObject
     implements VerificationCodeValueObject {
-  const factory _VerificationCodeValueObject({required String id}) =
-      _$_VerificationCodeValueObject;
+  const factory _VerificationCodeValueObject(
+      {required String id,
+      required int resendToken}) = _$_VerificationCodeValueObject;
 
   @override
   String get id;
+  @override
+  int get resendToken;
   @override
   @JsonKey(ignore: true)
   _$VerificationCodeValueObjectCopyWith<_VerificationCodeValueObject>

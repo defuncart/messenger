@@ -15,6 +15,7 @@ class VerificationCodeEntity extends Entity<VerificationCodeValueObject> {
 class VerificationCodeValueObject extends ValueObject with _$VerificationCodeValueObject {
   const factory VerificationCodeValueObject({
     required String id,
+    required int resendToken,
   }) = _VerificationCodeValueObject;
 }
 
