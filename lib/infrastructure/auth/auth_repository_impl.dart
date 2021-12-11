@@ -22,7 +22,10 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  Future<VerificationCodeEntity> _requestVerificationCodeMobile({required String phoneNumber}) async {
+  Future<VerificationCodeEntity> _requestVerificationCodeMobile({
+    required String phoneNumber,
+    int? forceResendingToken,
+  }) async {
     final completer = Completer<VerificationCodeEntity>();
 
     await _firebaseAuth.verifyPhoneNumber(
@@ -38,13 +41,23 @@ class AuthRepositoryImpl implements AuthRepository {
       },
       codeSent: (verificationId, resendToken) {
         completer.complete(
-          VerificationCodeEntity.value(VerificationCodeValueObject(id: verificationId)),
+          VerificationCodeEntity.value(VerificationCodeValueObject(id: verificationId, resendToken: resendToken!)),
         );
       },
       codeAutoRetrievalTimeout: (_) {},
+      forceResendingToken: forceResendingToken,
     );
 
     return completer.future;
+  }
+
+  @override
+  Future<VerificationCodeEntity> resendVerificationCode({required String phoneNumber, required int resendToken}) async {
+    if (Platform.isIOS || Platform.isAndroid) {
+      return _requestVerificationCodeMobile(phoneNumber: phoneNumber, forceResendingToken: resendToken);
+    } else {
+      throw UnsupportedError('Platform is not supported');
+    }
   }
 
   @override
