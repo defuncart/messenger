@@ -1,12 +1,14 @@
-import 'dart:math';
+import 'package:messenger/domain/auth/auth_repository.dart';
+import 'package:messenger/domain/auth/entity/verification_code_entity.dart';
+import 'package:messenger/service_locator.dart';
 
 class ResendSMSCodeUseCase {
-  const ResendSMSCodeUseCase();
+  ResendSMSCodeUseCase({
+    AuthRepository? authRepository,
+  }) : _authRepository = authRepository ?? ServiceLocator.get<AuthRepository>();
 
-  Future<bool> call() async {
-    // TODO connect with AuthRepository
-    await Future.delayed(const Duration(milliseconds: 500));
+  final AuthRepository _authRepository;
 
-    return Random().nextBool();
-  }
+  Future<VerificationCodeEntity> call({required String phoneNumber, required int resendToken}) =>
+      _authRepository.resendVerificationCode(phoneNumber: phoneNumber, resendToken: resendToken);
 }

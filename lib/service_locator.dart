@@ -1,4 +1,6 @@
 import 'package:get_it/get_it.dart';
+import 'package:messenger/domain/auth/auth_repository.dart';
+import 'package:messenger/infrastructure/auth/auth_repository_impl.dart';
 import 'package:meta/meta.dart';
 
 class ServiceLocator {
@@ -8,7 +10,7 @@ class ServiceLocator {
   ///
   /// Should be called once before app launches
   static void initialize() {
-    // TODO register singletons
+    GetIt.instance.registerSingleton<AuthRepository>(AuthRepositoryImpl());
   }
 
   /// Retrieves an instance of a registered type [T]

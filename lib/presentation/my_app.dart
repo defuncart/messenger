@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:messenger/presentation/auth/auth_screen.dart';
 import 'package:messenger/presentation/home/home_screen.dart';
 import 'package:messenger/presentation/home/home_screen_chat_detail.dart';
+import 'package:messenger/service_locator.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -25,6 +26,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> _initApp() async {
     await Firebase.initializeApp();
+    ServiceLocator.initialize();
 
     setState(() => _isInitialized = true);
   }

@@ -14,9 +14,9 @@ class AuthScreenViewModel extends ChangeNotifier {
     VerifyPhoneNumberUseCase? verifyPhoneNumberUseCase,
     VerifySMSCodeUseCase? verifySMSCodeUseCase,
     ResendSMSCodeUseCase? resendSMSCodeUseCase,
-  })  : _verifyPhoneNumberUseCase = verifyPhoneNumberUseCase ?? const VerifyPhoneNumberUseCase(),
-        _verifySMSCodeUseCase = verifySMSCodeUseCase ?? const VerifySMSCodeUseCase(),
-        _resendSMSCodeUseCase = resendSMSCodeUseCase ?? const ResendSMSCodeUseCase();
+  })  : _verifyPhoneNumberUseCase = verifyPhoneNumberUseCase ?? VerifyPhoneNumberUseCase(),
+        _verifySMSCodeUseCase = verifySMSCodeUseCase ?? VerifySMSCodeUseCase(),
+        _resendSMSCodeUseCase = resendSMSCodeUseCase ?? ResendSMSCodeUseCase();
 
   final VerifyPhoneNumberUseCase _verifyPhoneNumberUseCase;
   final VerifySMSCodeUseCase _verifySMSCodeUseCase;
@@ -37,6 +37,9 @@ class AuthScreenViewModel extends ChangeNotifier {
   String _countryCode = '';
   String _phoneNumber = '';
 
+  String _verificationId = '';
+  int _resendToken = 0;
+
   String get phoneNumberWithCountryCode =>
       PhoneNumberUtils.combine(countryCode: _countryCode, phoneNumber: _phoneNumber);
 
@@ -50,7 +53,9 @@ class AuthScreenViewModel extends ChangeNotifier {
     notifyListeners();
 
     final result = await _verifyPhoneNumberUseCase(phoneNumberWithCountryCode);
-    if (result) {
+    if (result.hasValue) {
+      _verificationId = result.value.id;
+      _resendToken = result.value.resendToken;
       _state = AuthScreenState.smsCode;
     } else {
       _phoneNumberIsInvalid = true;
@@ -64,15 +69,21 @@ class AuthScreenViewModel extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    final success = await _verifySMSCodeUseCase(smsCode);
+    final result = await _verifySMSCodeUseCase(
+      verificationId: _verificationId,
+      smsCode: smsCode,
+    );
 
     _isLoading = false;
     notifyListeners();
 
-    return success;
+    return result.hasValue && result.value.authenticatedSuccessfully;
   }
 
-  Future<bool> onResendCode() => _resendSMSCodeUseCase();
+  Future<bool> onResendCode() async {
+    final result = await _resendSMSCodeUseCase(phoneNumber: phoneNumberWithCountryCode, resendToken: _resendToken);
+    return result.hasValue;
+  }
 
   void onChangeNumber() {
     _state = AuthScreenState.phoneNumber;

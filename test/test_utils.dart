@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:messenger/domain/auth/entity/auth_entity.dart';
+import 'package:messenger/domain/auth/entity/verification_code_entity.dart';
 import 'package:messenger/domain/user/entity/user_entity.dart';
 import 'package:messenger/infrastructure/user/dto/user_dto.dart';
 
@@ -39,6 +41,26 @@ class TestEntities {
           avatarUrl: avatarUrl,
         ),
       );
+
+  /// Returns a [VerificationCodeEntity] model with given overriden parameters
+  static VerificationCodeEntity verificationCode({
+    String? id,
+  }) =>
+      VerificationCodeEntity.value(
+        TestValueObjects.verificationCode(
+          id: id,
+        ),
+      );
+
+  /// Returns a [AuthEntity] model with given overriden parameters
+  static AuthEntity auth({
+    bool? authenticatedSuccessfully,
+  }) =>
+      AuthEntity.value(
+        TestValueObjects.auth(
+          authenticatedSuccessfully: authenticatedSuccessfully,
+        ),
+      );
 }
 
 /// A test util to create value object instances for testing
@@ -57,6 +79,24 @@ class TestValueObjects {
         phoneNumber: phoneNumber ?? 'phoneNumber',
         displayName: displayName ?? 'displayName',
         avatarUrl: avatarUrl,
+      );
+
+  /// Returns a [VerificationCodeValueObject] model with given overriden parameters
+  static VerificationCodeValueObject verificationCode({
+    String? id,
+    int? resendToken,
+  }) =>
+      VerificationCodeValueObject(
+        id: id ?? 'id',
+        resendToken: resendToken ?? 0,
+      );
+
+  /// Returns a [AuthValueObject] model with given overriden parameters
+  static AuthValueObject auth({
+    bool? authenticatedSuccessfully,
+  }) =>
+      AuthValueObject(
+        authenticatedSuccessfully: authenticatedSuccessfully ?? true,
       );
 }
 
