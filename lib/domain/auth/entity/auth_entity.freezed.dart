@@ -118,13 +118,13 @@ class _$_AuthValueObject implements _AuthValueObject {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _AuthValueObject &&
-            (identical(other.authenticatedSuccessfully,
-                    authenticatedSuccessfully) ||
-                other.authenticatedSuccessfully == authenticatedSuccessfully));
+            const DeepCollectionEquality().equals(
+                other.authenticatedSuccessfully, authenticatedSuccessfully));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, authenticatedSuccessfully);
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(authenticatedSuccessfully));
 
   @JsonKey(ignore: true)
   @override

@@ -170,18 +170,21 @@ class _$_UserValueObject implements _UserValueObject {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _UserValueObject &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.phoneNumber, phoneNumber) ||
-                other.phoneNumber == phoneNumber) &&
-            (identical(other.displayName, displayName) ||
-                other.displayName == displayName) &&
-            (identical(other.avatarUrl, avatarUrl) ||
-                other.avatarUrl == avatarUrl));
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality()
+                .equals(other.phoneNumber, phoneNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.displayName, displayName) &&
+            const DeepCollectionEquality().equals(other.avatarUrl, avatarUrl));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, phoneNumber, displayName, avatarUrl);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(phoneNumber),
+      const DeepCollectionEquality().hash(displayName),
+      const DeepCollectionEquality().hash(avatarUrl));
 
   @JsonKey(ignore: true)
   @override
