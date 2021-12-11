@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:messenger/common/entities/failures.dart';
 import 'package:messenger/domain/auth/entity/verification_code_entity.dart';
 import 'package:messenger/presentation/auth/auth_screen_view_model.dart';
 import 'package:mocktail/mocktail.dart';
@@ -86,25 +87,36 @@ void main() {
     });
 
     group('onResendCode', () {
+      const phoneNumber = '+4915289763484';
+      const resendToken = 0;
+
+      setUp(() async {
+        when(() => mockVerifyPhoneNumberUseCase.call(any()))
+            .thenAnswer((_) => Future.value(TestEntities.verificationCode()));
+        await viewModel.onPhoneNumberSubmitted('+49', '15289763484');
+      });
+
       group('when code is resent', () {
         setUp(() {
-          when(() => mockResendSMSCodeUseCase.call()).thenAnswer((_) => Future.value(true));
+          when(() => mockResendSMSCodeUseCase.call(phoneNumber: phoneNumber, resendToken: resendToken))
+              .thenAnswer((_) => Future.value(TestEntities.verificationCode()));
         });
 
         test('then expect true returned', () async {
           expect(await viewModel.onResendCode(), isTrue);
-          verify(() => mockResendSMSCodeUseCase.call());
+          verify(() => mockResendSMSCodeUseCase.call(phoneNumber: phoneNumber, resendToken: resendToken));
         });
       });
 
       group('when code is not resent', () {
         setUp(() {
-          when(() => mockResendSMSCodeUseCase.call()).thenAnswer((_) => Future.value(false));
+          when(() => mockResendSMSCodeUseCase.call(phoneNumber: phoneNumber, resendToken: resendToken))
+              .thenAnswer((_) => Future.value(VerificationCodeEntity.failure(NoInternetFailure())));
         });
 
         test('then expect true returned', () async {
           expect(await viewModel.onResendCode(), isFalse);
-          verify(() => mockResendSMSCodeUseCase.call());
+          verify(() => mockResendSMSCodeUseCase.call(phoneNumber: phoneNumber, resendToken: resendToken));
         });
       });
     });
