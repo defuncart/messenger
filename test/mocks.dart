@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:messenger/common/repositories/date_time/date_time_generator.dart';
 import 'package:messenger/domain/auth/auth_repository.dart';
 import 'package:messenger/domain/auth/use_cases/resend_sms_code_use_case.dart';
+import 'package:messenger/domain/auth/use_cases/sign_out_use_case.dart';
 import 'package:messenger/domain/auth/use_cases/verify_phone_number_use_case.dart';
 import 'package:messenger/domain/auth/use_cases/verify_sms_code_use_case.dart';
 import 'package:messenger/presentation/auth/auth_screen_view_model.dart';
@@ -23,6 +24,8 @@ class MockVerifyPhoneNumberUseCase extends Mock implements VerifyPhoneNumberUseC
 class MockResendSMSCodeUseCase extends Mock implements ResendSMSCodeUseCase {}
 
 class MockVerifySMSCodeUseCase extends Mock implements VerifySMSCodeUseCase {}
+
+class MockSignOutUseCase extends Mock implements SignOutUseCase {}
 
 // functions
 class MockVoidCallback<T1, T2> extends Mock {
