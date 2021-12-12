@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:messenger/domain/auth/use_cases/sign_out_use_case.dart';
+import 'package:messenger/presentation/auth/auth_screen.dart';
 
 class HomeScreenChatList extends StatelessWidget {
   const HomeScreenChatList({
@@ -11,7 +13,18 @@ class HomeScreenChatList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          // TODO move into settings page
+          IconButton(
+            onPressed: () async {
+              await SignOutUseCase()();
+              Navigator.of(context).pushReplacementNamed(AuthScreen.routeName);
+            },
+            icon: const Icon(Icons.exit_to_app),
+          ),
+        ],
+      ),
       body: ListView(
         children: [
           ListTile(

@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:messenger/domain/auth/auth_repository.dart';
 import 'package:messenger/presentation/auth/auth_screen.dart';
 import 'package:messenger/presentation/home/home_screen.dart';
 import 'package:messenger/presentation/home/home_screen_chat_detail.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var _isInitialized = false;
+  late bool _isUserAuthenticated;
 
   @override
   void initState() {
@@ -27,16 +29,18 @@ class _MyAppState extends State<MyApp> {
   Future<void> _initApp() async {
     await Firebase.initializeApp();
     ServiceLocator.initialize();
+    _isUserAuthenticated = ServiceLocator.get<AuthRepository>().isUserAuthenticated;
 
     setState(() => _isInitialized = true);
   }
 
   @override
   Widget build(BuildContext context) {
-    return _isInitialized ? const MyAppContent() : const MyAppLoading();
+    return _isInitialized ? MyAppContent(isAuthenticated: _isUserAuthenticated) : const MyAppLoading();
   }
 }
 
+@visibleForTesting
 class MyAppLoading extends StatelessWidget {
   const MyAppLoading({Key? key}) : super(key: key);
 
@@ -50,7 +54,12 @@ class MyAppLoading extends StatelessWidget {
 
 @visibleForTesting
 class MyAppContent extends StatelessWidget {
-  const MyAppContent({Key? key}) : super(key: key);
+  const MyAppContent({
+    required this.isAuthenticated,
+    Key? key,
+  }) : super(key: key);
+
+  final bool isAuthenticated;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +72,7 @@ class MyAppContent extends StatelessWidget {
         AppLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      initialRoute: AuthScreen.routeName,
+      initialRoute: isAuthenticated ? HomeScreen.routeName : AuthScreen.routeName,
       routes: {
         AuthScreen.routeName: (_) => const AuthScreen(),
         HomeScreen.routeName: (_) => const HomeScreen(),
