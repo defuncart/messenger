@@ -39,9 +39,9 @@ class TestEntities {
   }) =>
       UserEntity.value(
         TestValueObjects.user(
-          id: id ?? 'id',
-          phoneNumber: phoneNumber ?? 'phoneNumber',
-          displayName: displayName ?? 'displayName',
+          id: id,
+          phoneNumber: phoneNumber,
+          displayName: displayName,
           avatarUrl: avatarUrl,
         ),
       );
