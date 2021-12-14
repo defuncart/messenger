@@ -2,6 +2,7 @@ import 'package:firebase_core_platform_interface/firebase_core_platform_interfac
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:messenger/common/repositories/date_time/date_time_generator.dart';
+import 'package:messenger/common/repositories/id/id_generator.dart';
 import 'package:messenger/domain/auth/auth_repository.dart';
 import 'package:messenger/domain/auth/use_cases/resend_sms_code_use_case.dart';
 import 'package:messenger/domain/auth/use_cases/sign_out_use_case.dart';
@@ -14,6 +15,8 @@ import 'package:mocktail/mocktail.dart';
 class MockAuthRepository extends Mock implements AuthRepository {}
 
 class MockDateTimeGenerator extends Mock implements DateTimeGenerator {}
+
+class MockIdGenerator extends Mock implements IdGenerator {}
 
 // view models
 class MockAuthScreenViewModel extends Mock implements AuthScreenViewModel {}

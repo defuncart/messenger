@@ -3,7 +3,9 @@ import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:messenger/domain/auth/entity/auth_entity.dart';
 import 'package:messenger/domain/auth/entity/verification_code_entity.dart';
+import 'package:messenger/domain/message/entity/message_entity.dart';
 import 'package:messenger/domain/user/entity/user_entity.dart';
+import 'package:messenger/infrastructure/message/dto/message_dto.dart';
 import 'package:messenger/infrastructure/user/dto/user_dto.dart';
 
 /// Wraps [widget] with in [MaterialApp]
@@ -39,6 +41,26 @@ class TestEntities {
           phoneNumber: phoneNumber ?? 'phoneNumber',
           displayName: displayName ?? 'displayName',
           avatarUrl: avatarUrl,
+        ),
+      );
+
+  /// Returns a [MessageEntity] model with given overriden parameters
+  static MessageEntity message({
+    String? id,
+    String? text,
+    String? createdBy,
+    DateTime? createdAt,
+    bool? isEdited,
+    bool? isDeleted,
+  }) =>
+      MessageEntity.value(
+        TestValueObjects.message(
+          id: id,
+          text: text,
+          createdBy: createdBy,
+          createdAt: createdAt,
+          isEdited: isEdited,
+          isDeleted: isDeleted,
         ),
       );
 
@@ -81,6 +103,24 @@ class TestValueObjects {
         avatarUrl: avatarUrl,
       );
 
+  /// Returns a [MessageValueObject] model with given overriden parameters
+  static MessageValueObject message({
+    String? id,
+    String? text,
+    String? createdBy,
+    DateTime? createdAt,
+    bool? isEdited,
+    bool? isDeleted,
+  }) =>
+      MessageValueObject(
+        id: id ?? 'id',
+        text: text ?? 'text',
+        createdBy: createdBy ?? 'createdBy',
+        createdAt: createdAt ?? DateTime(1),
+        isEdited: isEdited ?? false,
+        isDeleted: isDeleted ?? false,
+      );
+
   /// Returns a [VerificationCodeValueObject] model with given overriden parameters
   static VerificationCodeValueObject verificationCode({
     String? id,
@@ -120,5 +160,23 @@ class TestDtos {
         avatarUrl: avatarUrl,
         createdAt: createdAt ?? DateTime(1),
         updatedAt: updatedAt ?? DateTime(1),
+      );
+
+  /// Returns a [MessageDto] model with given overriden parameters
+  static MessageDto message({
+    String? id,
+    String? text,
+    String? createdBy,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    DateTime? deletedAt,
+  }) =>
+      MessageDto(
+        id: id ?? 'id',
+        text: text ?? 'text',
+        createdBy: createdBy ?? 'createdBy',
+        createdAt: createdAt ?? DateTime(1),
+        updatedAt: updatedAt,
+        deletedAt: deletedAt,
       );
 }
