@@ -68,7 +68,7 @@ class MessageRepositoryImpl implements MessageRepository {
 
   @override
   Future<void> updateMessage({required String id, required String text}) async {
-    final now = _dateTimeGenerator.nowUtc;
+    final now = _dateTimeGenerator.nowUtc.toIso8601String();
     await _firebaseFirestore.collection(_collection).doc(id).update({
       'text': text,
       'updatedAt': now,
@@ -94,7 +94,7 @@ class MessageRepositoryImpl implements MessageRepository {
 
   @override
   Future<void> deleteMessage({required String id}) async {
-    final now = _dateTimeGenerator.nowUtc;
+    final now = _dateTimeGenerator.nowUtc.toIso8601String();
     await _firebaseFirestore.collection(_collection).doc(id).update({
       'deletedAt': now,
     });
