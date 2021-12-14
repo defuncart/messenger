@@ -2,7 +2,10 @@ import 'package:messenger/domain/message/entity/message_entity.dart';
 
 abstract class MessageRepository {
   /// Creates a [MessageEntity] with [text]
-  Future<MessageEntity> createMessage({required String text});
+  Future<MessageEntity> createMessage({
+    required String text,
+    required String createdBy,
+  });
 
   /// Updates a [MessageEntity] by [id]
   Future<void> updateMessage({required String id, required String text});

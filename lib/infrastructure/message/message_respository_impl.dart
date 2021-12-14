@@ -48,13 +48,17 @@ class MessageRepositoryImpl implements MessageRepository {
   }
 
   @override
-  Future<MessageEntity> createMessage({required String text}) async {
+  Future<MessageEntity> createMessage({
+    required String text,
+    required String createdBy,
+  }) async {
     final id = _idGenerator.generate();
     final now = _dateTimeGenerator.nowUtc;
     final message = MessageDto(
       id: id,
-      createdAt: now,
       text: text,
+      createdBy: createdBy,
+      createdAt: now,
     );
 
     await _saveMessage(message);

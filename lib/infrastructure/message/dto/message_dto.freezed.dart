@@ -24,12 +24,14 @@ class _$MessageDtoTearOff {
   _MessageDto call(
       {@JsonKey() required String id,
       @JsonKey() required String text,
+      @JsonKey() required String createdBy,
       @JsonKey() required DateTime createdAt,
       @JsonKey() DateTime? updatedAt,
       @JsonKey() DateTime? deletedAt}) {
     return _MessageDto(
       id: id,
       text: text,
+      createdBy: createdBy,
       createdAt: createdAt,
       updatedAt: updatedAt,
       deletedAt: deletedAt,
@@ -51,6 +53,8 @@ mixin _$MessageDto {
   @JsonKey()
   String get text => throw _privateConstructorUsedError;
   @JsonKey()
+  String get createdBy => throw _privateConstructorUsedError;
+  @JsonKey()
   DateTime get createdAt => throw _privateConstructorUsedError;
   @JsonKey()
   DateTime? get updatedAt => throw _privateConstructorUsedError;
@@ -71,6 +75,7 @@ abstract class $MessageDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey() String id,
       @JsonKey() String text,
+      @JsonKey() String createdBy,
       @JsonKey() DateTime createdAt,
       @JsonKey() DateTime? updatedAt,
       @JsonKey() DateTime? deletedAt});
@@ -88,6 +93,7 @@ class _$MessageDtoCopyWithImpl<$Res> implements $MessageDtoCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? text = freezed,
+    Object? createdBy = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? deletedAt = freezed,
@@ -100,6 +106,10 @@ class _$MessageDtoCopyWithImpl<$Res> implements $MessageDtoCopyWith<$Res> {
       text: text == freezed
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdBy: createdBy == freezed
+          ? _value.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: createdAt == freezed
           ? _value.createdAt
@@ -126,6 +136,7 @@ abstract class _$MessageDtoCopyWith<$Res> implements $MessageDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey() String id,
       @JsonKey() String text,
+      @JsonKey() String createdBy,
       @JsonKey() DateTime createdAt,
       @JsonKey() DateTime? updatedAt,
       @JsonKey() DateTime? deletedAt});
@@ -145,6 +156,7 @@ class __$MessageDtoCopyWithImpl<$Res> extends _$MessageDtoCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? text = freezed,
+    Object? createdBy = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? deletedAt = freezed,
@@ -157,6 +169,10 @@ class __$MessageDtoCopyWithImpl<$Res> extends _$MessageDtoCopyWithImpl<$Res>
       text: text == freezed
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdBy: createdBy == freezed
+          ? _value.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: createdAt == freezed
           ? _value.createdAt
@@ -180,6 +196,7 @@ class _$_MessageDto implements _MessageDto {
   const _$_MessageDto(
       {@JsonKey() required this.id,
       @JsonKey() required this.text,
+      @JsonKey() required this.createdBy,
       @JsonKey() required this.createdAt,
       @JsonKey() this.updatedAt,
       @JsonKey() this.deletedAt});
@@ -195,6 +212,9 @@ class _$_MessageDto implements _MessageDto {
   final String text;
   @override
   @JsonKey()
+  final String createdBy;
+  @override
+  @JsonKey()
   final DateTime createdAt;
   @override
   @JsonKey()
@@ -205,7 +225,7 @@ class _$_MessageDto implements _MessageDto {
 
   @override
   String toString() {
-    return 'MessageDto(id: $id, text: $text, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'MessageDto(id: $id, text: $text, createdBy: $createdBy, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -215,6 +235,7 @@ class _$_MessageDto implements _MessageDto {
             other is _MessageDto &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.text, text) &&
+            const DeepCollectionEquality().equals(other.createdBy, createdBy) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
             const DeepCollectionEquality().equals(other.deletedAt, deletedAt));
@@ -225,6 +246,7 @@ class _$_MessageDto implements _MessageDto {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(text),
+      const DeepCollectionEquality().hash(createdBy),
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(updatedAt),
       const DeepCollectionEquality().hash(deletedAt));
@@ -244,6 +266,7 @@ abstract class _MessageDto implements MessageDto {
   const factory _MessageDto(
       {@JsonKey() required String id,
       @JsonKey() required String text,
+      @JsonKey() required String createdBy,
       @JsonKey() required DateTime createdAt,
       @JsonKey() DateTime? updatedAt,
       @JsonKey() DateTime? deletedAt}) = _$_MessageDto;
@@ -257,6 +280,9 @@ abstract class _MessageDto implements MessageDto {
   @override
   @JsonKey()
   String get text;
+  @override
+  @JsonKey()
+  String get createdBy;
   @override
   @JsonKey()
   DateTime get createdAt;

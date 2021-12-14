@@ -20,12 +20,14 @@ class _$MessageValueObjectTearOff {
   _MessageValueObject call(
       {required String id,
       required String text,
+      required String createdBy,
       required DateTime createdAt,
       bool isEdited = false,
       bool isDeleted = false}) {
     return _MessageValueObject(
       id: id,
       text: text,
+      createdBy: createdBy,
       createdAt: createdAt,
       isEdited: isEdited,
       isDeleted: isDeleted,
@@ -40,6 +42,7 @@ const $MessageValueObject = _$MessageValueObjectTearOff();
 mixin _$MessageValueObject {
   String get id => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
+  String get createdBy => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   bool get isEdited => throw _privateConstructorUsedError;
   bool get isDeleted => throw _privateConstructorUsedError;
@@ -57,6 +60,7 @@ abstract class $MessageValueObjectCopyWith<$Res> {
   $Res call(
       {String id,
       String text,
+      String createdBy,
       DateTime createdAt,
       bool isEdited,
       bool isDeleted});
@@ -75,6 +79,7 @@ class _$MessageValueObjectCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? text = freezed,
+    Object? createdBy = freezed,
     Object? createdAt = freezed,
     Object? isEdited = freezed,
     Object? isDeleted = freezed,
@@ -87,6 +92,10 @@ class _$MessageValueObjectCopyWithImpl<$Res>
       text: text == freezed
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdBy: createdBy == freezed
+          ? _value.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: createdAt == freezed
           ? _value.createdAt
@@ -114,6 +123,7 @@ abstract class _$MessageValueObjectCopyWith<$Res>
   $Res call(
       {String id,
       String text,
+      String createdBy,
       DateTime createdAt,
       bool isEdited,
       bool isDeleted});
@@ -134,6 +144,7 @@ class __$MessageValueObjectCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? text = freezed,
+    Object? createdBy = freezed,
     Object? createdAt = freezed,
     Object? isEdited = freezed,
     Object? isDeleted = freezed,
@@ -146,6 +157,10 @@ class __$MessageValueObjectCopyWithImpl<$Res>
       text: text == freezed
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdBy: createdBy == freezed
+          ? _value.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: createdAt == freezed
           ? _value.createdAt
@@ -169,6 +184,7 @@ class _$_MessageValueObject implements _MessageValueObject {
   const _$_MessageValueObject(
       {required this.id,
       required this.text,
+      required this.createdBy,
       required this.createdAt,
       this.isEdited = false,
       this.isDeleted = false});
@@ -177,6 +193,8 @@ class _$_MessageValueObject implements _MessageValueObject {
   final String id;
   @override
   final String text;
+  @override
+  final String createdBy;
   @override
   final DateTime createdAt;
   @JsonKey(defaultValue: false)
@@ -188,7 +206,7 @@ class _$_MessageValueObject implements _MessageValueObject {
 
   @override
   String toString() {
-    return 'MessageValueObject(id: $id, text: $text, createdAt: $createdAt, isEdited: $isEdited, isDeleted: $isDeleted)';
+    return 'MessageValueObject(id: $id, text: $text, createdBy: $createdBy, createdAt: $createdAt, isEdited: $isEdited, isDeleted: $isDeleted)';
   }
 
   @override
@@ -198,6 +216,7 @@ class _$_MessageValueObject implements _MessageValueObject {
             other is _MessageValueObject &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.text, text) &&
+            const DeepCollectionEquality().equals(other.createdBy, createdBy) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.isEdited, isEdited) &&
             const DeepCollectionEquality().equals(other.isDeleted, isDeleted));
@@ -208,6 +227,7 @@ class _$_MessageValueObject implements _MessageValueObject {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(text),
+      const DeepCollectionEquality().hash(createdBy),
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(isEdited),
       const DeepCollectionEquality().hash(isDeleted));
@@ -222,6 +242,7 @@ abstract class _MessageValueObject implements MessageValueObject {
   const factory _MessageValueObject(
       {required String id,
       required String text,
+      required String createdBy,
       required DateTime createdAt,
       bool isEdited,
       bool isDeleted}) = _$_MessageValueObject;
@@ -230,6 +251,8 @@ abstract class _MessageValueObject implements MessageValueObject {
   String get id;
   @override
   String get text;
+  @override
+  String get createdBy;
   @override
   DateTime get createdAt;
   @override

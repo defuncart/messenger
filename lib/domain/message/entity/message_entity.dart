@@ -16,6 +16,7 @@ class MessageValueObject extends ValueObject with _$MessageValueObject {
   const factory MessageValueObject({
     required String id,
     required String text,
+    required String createdBy,
     required DateTime createdAt,
     @Default(false) bool isEdited,
     @Default(false) bool isDeleted,

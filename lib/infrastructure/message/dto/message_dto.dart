@@ -8,6 +8,7 @@ class MessageDto with _$MessageDto {
   const factory MessageDto({
     @JsonKey() required String id,
     @JsonKey() required String text,
+    @JsonKey() required String createdBy,
     @JsonKey() required DateTime createdAt,
     @JsonKey() DateTime? updatedAt,
     @JsonKey() DateTime? deletedAt,

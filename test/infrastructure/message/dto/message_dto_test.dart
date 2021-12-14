@@ -16,6 +16,7 @@ void main() {
     final messageJson = {
       'id': 'id',
       'text': 'text',
+      'createdBy': 'createdBy',
       'createdAt': '0001-01-01T00:00:00.000',
       'updatedAt': null,
       'deletedAt': null,

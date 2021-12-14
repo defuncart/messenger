@@ -5,6 +5,7 @@ extension MessageDtoExtensions on MessageDto {
   MessageValueObject toValueObject() => MessageValueObject(
         id: id,
         text: text,
+        createdBy: createdBy,
         createdAt: createdAt,
         isEdited: updatedAt != null,
         isDeleted: deletedAt != null,

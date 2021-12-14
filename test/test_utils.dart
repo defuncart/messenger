@@ -48,6 +48,7 @@ class TestEntities {
   static MessageEntity message({
     String? id,
     String? text,
+    String? createdBy,
     DateTime? createdAt,
     bool? isEdited,
     bool? isDeleted,
@@ -56,6 +57,7 @@ class TestEntities {
         TestValueObjects.message(
           id: id,
           text: text,
+          createdBy: createdBy,
           createdAt: createdAt,
           isEdited: isEdited,
           isDeleted: isDeleted,
@@ -105,6 +107,7 @@ class TestValueObjects {
   static MessageValueObject message({
     String? id,
     String? text,
+    String? createdBy,
     DateTime? createdAt,
     bool? isEdited,
     bool? isDeleted,
@@ -112,6 +115,7 @@ class TestValueObjects {
       MessageValueObject(
         id: id ?? 'id',
         text: text ?? 'text',
+        createdBy: createdBy ?? 'createdBy',
         createdAt: createdAt ?? DateTime(1),
         isEdited: isEdited ?? false,
         isDeleted: isDeleted ?? false,
@@ -162,6 +166,7 @@ class TestDtos {
   static MessageDto message({
     String? id,
     String? text,
+    String? createdBy,
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? deletedAt,
@@ -169,6 +174,7 @@ class TestDtos {
       MessageDto(
         id: id ?? 'id',
         text: text ?? 'text',
+        createdBy: createdBy ?? 'createdBy',
         createdAt: createdAt ?? DateTime(1),
         updatedAt: updatedAt,
         deletedAt: deletedAt,
