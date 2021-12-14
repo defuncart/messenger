@@ -73,11 +73,12 @@ class AuthScreenViewModel extends ChangeNotifier {
       verificationId: _verificationId,
       smsCode: smsCode,
     );
+    // TODO create user in db if needed
 
     _isLoading = false;
     notifyListeners();
 
-    return result.hasValue && result.value.authenticatedSuccessfully;
+    return result.hasValue;
   }
 
   Future<bool> onResendCode() async {

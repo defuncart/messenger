@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:messenger/common/entities/failures.dart';
+import 'package:messenger/domain/auth/entity/auth_entity.dart';
 import 'package:messenger/domain/auth/entity/verification_code_entity.dart';
 import 'package:messenger/presentation/auth/auth_screen_view_model.dart';
 import 'package:mocktail/mocktail.dart';
@@ -64,7 +65,7 @@ void main() {
       group('when code is valid', () {
         setUp(() {
           when(() => mockVerifySMSCodeUseCase.call(verificationId: verificationId, smsCode: smsCode))
-              .thenAnswer((_) => Future.value(TestEntities.auth(authenticatedSuccessfully: true)));
+              .thenAnswer((_) => Future.value(TestEntities.auth()));
         });
 
         test('then expect true returned', () async {
@@ -76,7 +77,7 @@ void main() {
       group('when code is invalid', () {
         setUp(() {
           when(() => mockVerifySMSCodeUseCase.call(verificationId: verificationId, smsCode: smsCode))
-              .thenAnswer((_) => Future.value(TestEntities.auth(authenticatedSuccessfully: false)));
+              .thenAnswer((_) => Future.value(AuthEntity.failure(AuthFailure())));
         });
 
         test('then expect false returned', () async {
