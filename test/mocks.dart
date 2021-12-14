@@ -8,11 +8,14 @@ import 'package:messenger/domain/auth/use_cases/resend_sms_code_use_case.dart';
 import 'package:messenger/domain/auth/use_cases/sign_out_use_case.dart';
 import 'package:messenger/domain/auth/use_cases/verify_phone_number_use_case.dart';
 import 'package:messenger/domain/auth/use_cases/verify_sms_code_use_case.dart';
+import 'package:messenger/domain/user/user_respository.dart';
 import 'package:messenger/presentation/auth/auth_screen_view_model.dart';
 import 'package:mocktail/mocktail.dart';
 
 // repositories
 class MockAuthRepository extends Mock implements AuthRepository {}
+
+class MockUserRepository extends Mock implements UserRepository {}
 
 class MockDateTimeGenerator extends Mock implements DateTimeGenerator {}
 
