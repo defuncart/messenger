@@ -3,8 +3,10 @@ import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:messenger/domain/auth/entity/auth_entity.dart';
 import 'package:messenger/domain/auth/entity/verification_code_entity.dart';
+import 'package:messenger/domain/chat/entity/chat_entity.dart';
 import 'package:messenger/domain/message/entity/message_entity.dart';
 import 'package:messenger/domain/user/entity/user_entity.dart';
+import 'package:messenger/infrastructure/chat/dto/chat_dto.dart';
 import 'package:messenger/infrastructure/message/dto/message_dto.dart';
 import 'package:messenger/infrastructure/user/dto/user_dto.dart';
 
@@ -60,6 +62,26 @@ class TestEntities {
           createdBy: createdBy,
           createdAt: createdAt,
           isEdited: isEdited,
+          isDeleted: isDeleted,
+        ),
+      );
+
+  /// Returns a [ChatEntity] model with given overriden parameters
+  static ChatEntity chat({
+    String? id,
+    List<String>? messages,
+    String? title,
+    List<String>? userIds,
+    String? createdBy,
+    bool? isDeleted,
+  }) =>
+      ChatEntity.value(
+        TestValueObjects.chat(
+          id: id,
+          messages: messages,
+          title: title,
+          userIds: userIds,
+          createdBy: createdBy,
           isDeleted: isDeleted,
         ),
       );
@@ -121,6 +143,24 @@ class TestValueObjects {
         isDeleted: isDeleted ?? false,
       );
 
+  /// Returns a [ChatValueObject] model with given overriden parameters
+  static ChatValueObject chat({
+    String? id,
+    String? title,
+    List<String>? userIds,
+    List<String>? messages,
+    String? createdBy,
+    bool? isDeleted,
+  }) =>
+      ChatValueObject(
+        id: id ?? 'id',
+        messages: messages ?? [],
+        title: title ?? '',
+        userIds: userIds ?? [],
+        createdBy: createdBy ?? 'createdBy',
+        isDeleted: isDeleted ?? false,
+      );
+
   /// Returns a [VerificationCodeValueObject] model with given overriden parameters
   static VerificationCodeValueObject verificationCode({
     String? id,
@@ -174,6 +214,28 @@ class TestDtos {
       MessageDto(
         id: id ?? 'id',
         text: text ?? 'text',
+        createdBy: createdBy ?? 'createdBy',
+        createdAt: createdAt ?? DateTime(1),
+        updatedAt: updatedAt,
+        deletedAt: deletedAt,
+      );
+
+  /// Returns a [ChatDto] model with given overriden parameters
+  static ChatDto chat({
+    String? id,
+    String? title,
+    List<String>? userIds,
+    List<String>? messages,
+    String? createdBy,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    DateTime? deletedAt,
+  }) =>
+      ChatDto(
+        id: id ?? 'id',
+        userIds: userIds ?? [],
+        title: title ?? '',
+        messages: messages ?? [],
         createdBy: createdBy ?? 'createdBy',
         createdAt: createdAt ?? DateTime(1),
         updatedAt: updatedAt,
