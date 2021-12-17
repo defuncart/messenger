@@ -17,6 +17,9 @@ class AuthRepositoryImpl implements AuthRepository {
   bool get isUserAuthenticated => _firebaseAuth.currentUser != null;
 
   @override
+  String? get userId => _firebaseAuth.currentUser?.uid;
+
+  @override
   Future<VerificationCodeEntity> requestVerificationCode({required String phoneNumber}) async {
     if (Platform.isIOS || Platform.isAndroid) {
       return _requestVerificationCodeMobile(phoneNumber: phoneNumber);
