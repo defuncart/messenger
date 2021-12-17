@@ -17,9 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$AuthValueObjectTearOff {
   const _$AuthValueObjectTearOff();
 
-  _AuthValueObject call({required bool authenticatedSuccessfully}) {
+  _AuthValueObject call({required String userId}) {
     return _AuthValueObject(
-      authenticatedSuccessfully: authenticatedSuccessfully,
+      userId: userId,
     );
   }
 }
@@ -29,7 +29,7 @@ const $AuthValueObject = _$AuthValueObjectTearOff();
 
 /// @nodoc
 mixin _$AuthValueObject {
-  bool get authenticatedSuccessfully => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AuthValueObjectCopyWith<AuthValueObject> get copyWith =>
@@ -41,7 +41,7 @@ abstract class $AuthValueObjectCopyWith<$Res> {
   factory $AuthValueObjectCopyWith(
           AuthValueObject value, $Res Function(AuthValueObject) then) =
       _$AuthValueObjectCopyWithImpl<$Res>;
-  $Res call({bool authenticatedSuccessfully});
+  $Res call({String userId});
 }
 
 /// @nodoc
@@ -55,13 +55,13 @@ class _$AuthValueObjectCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? authenticatedSuccessfully = freezed,
+    Object? userId = freezed,
   }) {
     return _then(_value.copyWith(
-      authenticatedSuccessfully: authenticatedSuccessfully == freezed
-          ? _value.authenticatedSuccessfully
-          : authenticatedSuccessfully // ignore: cast_nullable_to_non_nullable
-              as bool,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -73,7 +73,7 @@ abstract class _$AuthValueObjectCopyWith<$Res>
           _AuthValueObject value, $Res Function(_AuthValueObject) then) =
       __$AuthValueObjectCopyWithImpl<$Res>;
   @override
-  $Res call({bool authenticatedSuccessfully});
+  $Res call({String userId});
 }
 
 /// @nodoc
@@ -89,13 +89,13 @@ class __$AuthValueObjectCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? authenticatedSuccessfully = freezed,
+    Object? userId = freezed,
   }) {
     return _then(_AuthValueObject(
-      authenticatedSuccessfully: authenticatedSuccessfully == freezed
-          ? _value.authenticatedSuccessfully
-          : authenticatedSuccessfully // ignore: cast_nullable_to_non_nullable
-              as bool,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -103,14 +103,14 @@ class __$AuthValueObjectCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AuthValueObject implements _AuthValueObject {
-  const _$_AuthValueObject({required this.authenticatedSuccessfully});
+  const _$_AuthValueObject({required this.userId});
 
   @override
-  final bool authenticatedSuccessfully;
+  final String userId;
 
   @override
   String toString() {
-    return 'AuthValueObject(authenticatedSuccessfully: $authenticatedSuccessfully)';
+    return 'AuthValueObject(userId: $userId)';
   }
 
   @override
@@ -118,13 +118,12 @@ class _$_AuthValueObject implements _AuthValueObject {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _AuthValueObject &&
-            const DeepCollectionEquality().equals(
-                other.authenticatedSuccessfully, authenticatedSuccessfully));
+            const DeepCollectionEquality().equals(other.userId, userId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(authenticatedSuccessfully));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(userId));
 
   @JsonKey(ignore: true)
   @override
@@ -133,11 +132,10 @@ class _$_AuthValueObject implements _AuthValueObject {
 }
 
 abstract class _AuthValueObject implements AuthValueObject {
-  const factory _AuthValueObject({required bool authenticatedSuccessfully}) =
-      _$_AuthValueObject;
+  const factory _AuthValueObject({required String userId}) = _$_AuthValueObject;
 
   @override
-  bool get authenticatedSuccessfully;
+  String get userId;
   @override
   @JsonKey(ignore: true)
   _$AuthValueObjectCopyWith<_AuthValueObject> get copyWith =>

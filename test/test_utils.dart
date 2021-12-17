@@ -39,9 +39,9 @@ class TestEntities {
   }) =>
       UserEntity.value(
         TestValueObjects.user(
-          id: id ?? 'id',
-          phoneNumber: phoneNumber ?? 'phoneNumber',
-          displayName: displayName ?? 'displayName',
+          id: id,
+          phoneNumber: phoneNumber,
+          displayName: displayName,
           avatarUrl: avatarUrl,
         ),
       );
@@ -98,11 +98,11 @@ class TestEntities {
 
   /// Returns a [AuthEntity] model with given overriden parameters
   static AuthEntity auth({
-    bool? authenticatedSuccessfully,
+    String? userId,
   }) =>
       AuthEntity.value(
         TestValueObjects.auth(
-          authenticatedSuccessfully: authenticatedSuccessfully,
+          userId: userId,
         ),
       );
 }
@@ -173,10 +173,10 @@ class TestValueObjects {
 
   /// Returns a [AuthValueObject] model with given overriden parameters
   static AuthValueObject auth({
-    bool? authenticatedSuccessfully,
+    String? userId,
   }) =>
       AuthValueObject(
-        authenticatedSuccessfully: authenticatedSuccessfully ?? true,
+        userId: userId ?? 'userId',
       );
 }
 

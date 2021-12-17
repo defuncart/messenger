@@ -3,6 +3,7 @@ import 'package:messenger/common/utils/phone_number_utils.dart';
 import 'package:messenger/domain/auth/use_cases/resend_sms_code_use_case.dart';
 import 'package:messenger/domain/auth/use_cases/verify_phone_number_use_case.dart';
 import 'package:messenger/domain/auth/use_cases/verify_sms_code_use_case.dart';
+import 'package:messenger/domain/common/use_cases/create_user_on_first_login_use_case.dart';
 
 enum AuthScreenState {
   phoneNumber,
@@ -14,13 +15,16 @@ class AuthScreenViewModel extends ChangeNotifier {
     VerifyPhoneNumberUseCase? verifyPhoneNumberUseCase,
     VerifySMSCodeUseCase? verifySMSCodeUseCase,
     ResendSMSCodeUseCase? resendSMSCodeUseCase,
+    CreateUserOnFirstLoginUseCase? createUserOnFirstLoginUseCase,
   })  : _verifyPhoneNumberUseCase = verifyPhoneNumberUseCase ?? VerifyPhoneNumberUseCase(),
         _verifySMSCodeUseCase = verifySMSCodeUseCase ?? VerifySMSCodeUseCase(),
-        _resendSMSCodeUseCase = resendSMSCodeUseCase ?? ResendSMSCodeUseCase();
+        _resendSMSCodeUseCase = resendSMSCodeUseCase ?? ResendSMSCodeUseCase(),
+        _createUserOnFirstLoginUseCase = createUserOnFirstLoginUseCase ?? CreateUserOnFirstLoginUseCase();
 
   final VerifyPhoneNumberUseCase _verifyPhoneNumberUseCase;
   final VerifySMSCodeUseCase _verifySMSCodeUseCase;
   final ResendSMSCodeUseCase _resendSMSCodeUseCase;
+  final CreateUserOnFirstLoginUseCase _createUserOnFirstLoginUseCase;
 
   var _state = AuthScreenState.phoneNumber;
   AuthScreenState get state => _state;
@@ -73,11 +77,15 @@ class AuthScreenViewModel extends ChangeNotifier {
       verificationId: _verificationId,
       smsCode: smsCode,
     );
+    if (result.hasValue) {
+      // create a user in db only if it is first login
+      _createUserOnFirstLoginUseCase(userId: result.value.userId, phoneNumber: phoneNumberWithCountryCode);
+    }
 
     _isLoading = false;
     notifyListeners();
 
-    return result.hasValue && result.value.authenticatedSuccessfully;
+    return result.hasValue;
   }
 
   Future<bool> onResendCode() async {

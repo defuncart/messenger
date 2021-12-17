@@ -14,7 +14,7 @@ class AuthEntity extends Entity<AuthValueObject> {
 @freezed
 class AuthValueObject extends ValueObject with _$AuthValueObject {
   const factory AuthValueObject({
-    required bool authenticatedSuccessfully,
+    required String userId,
   }) = _AuthValueObject;
 }
 

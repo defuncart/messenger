@@ -8,11 +8,15 @@ import 'package:messenger/domain/auth/use_cases/resend_sms_code_use_case.dart';
 import 'package:messenger/domain/auth/use_cases/sign_out_use_case.dart';
 import 'package:messenger/domain/auth/use_cases/verify_phone_number_use_case.dart';
 import 'package:messenger/domain/auth/use_cases/verify_sms_code_use_case.dart';
+import 'package:messenger/domain/common/use_cases/create_user_on_first_login_use_case.dart';
+import 'package:messenger/domain/user/user_respository.dart';
 import 'package:messenger/presentation/auth/auth_screen_view_model.dart';
 import 'package:mocktail/mocktail.dart';
 
 // repositories
 class MockAuthRepository extends Mock implements AuthRepository {}
+
+class MockUserRepository extends Mock implements UserRepository {}
 
 class MockDateTimeGenerator extends Mock implements DateTimeGenerator {}
 
@@ -29,6 +33,8 @@ class MockResendSMSCodeUseCase extends Mock implements ResendSMSCodeUseCase {}
 class MockVerifySMSCodeUseCase extends Mock implements VerifySMSCodeUseCase {}
 
 class MockSignOutUseCase extends Mock implements SignOutUseCase {}
+
+class MockCreateUserOnFirstLoginUseCase extends Mock implements CreateUserOnFirstLoginUseCase {}
 
 // functions
 class MockVoidCallback<T1, T2> extends Mock {

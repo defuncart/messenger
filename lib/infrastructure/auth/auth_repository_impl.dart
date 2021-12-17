@@ -68,7 +68,10 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final result = await _firebaseAuth
           .signInWithCredential(PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode));
-      return AuthEntity.value(AuthValueObject(authenticatedSuccessfully: result.user != null));
+      if (result.user != null) {
+        return AuthEntity.value(AuthValueObject(userId: result.user!.uid));
+      }
+      return AuthEntity.failure(AuthFailure());
     } catch (e) {
       return AuthEntity.failure(AuthFailure());
     }
