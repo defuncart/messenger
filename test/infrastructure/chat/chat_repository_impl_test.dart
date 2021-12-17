@@ -100,6 +100,66 @@ void main() {
       });
     });
 
+    group('watchChat', () {
+      const id = 'id';
+
+      late ChatEntity initialChat;
+
+      group('when the chat is in the db', () {
+        setUp(() async {
+          await fakeFirebaseFirestore.collection('chats').doc(id).set({
+            'id': 'id',
+            'messages': [],
+            'title': '',
+            'userIds': ['user1'],
+            'createdBy': 'createdBy',
+            'createdAt': '0001-01-01T00:00:00.000',
+            'updatedAt': null,
+            'deletedAt': null,
+          });
+
+          initialChat = TestEntities.chat(userIds: ['user1']);
+        });
+
+        test('expect correct stream', () {
+          final stream = chatRepositoryImpl.watchChat(id: id);
+
+          expect(
+            stream,
+            emitsInOrder([initialChat]),
+          );
+        });
+      });
+
+      group('and when the chat is update', () {
+        late ChatEntity updatedChat;
+
+        setUp(() async {
+          await fakeFirebaseFirestore.collection('chats').doc(id).set({
+            'id': 'id',
+            'messages': [],
+            'title': '',
+            'userIds': ['user1', 'user2'],
+            'createdBy': 'createdBy',
+            'createdAt': '0001-01-01T00:00:00.000',
+            'updatedAt': null,
+            'deletedAt': null,
+          });
+
+          updatedChat = TestEntities.chat(userIds: ['user1', 'user2']);
+        });
+
+        test('expect correct stream', () {
+          final stream = chatRepositoryImpl.watchChat(id: id);
+
+          expect(
+            stream,
+            emitsInOrder([updatedChat]),
+          );
+        });
+      });
+    });
+
     group('deleteChat', () {
       const id = 'id';
 
