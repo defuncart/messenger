@@ -93,6 +93,14 @@ class MessageRepositoryImpl implements MessageRepository {
   }
 
   @override
+  Stream<List<MessageEntity>> watchMessages({required List<String> ids}) => _firebaseFirestore
+      .collection(_collection)
+      .where('id', whereIn: ids)
+      .orderBy('createdAt')
+      .snapshots()
+      .map((querySnapshot) => querySnapshot.docs.map((docSnapshot) => _snapshotToEntity(docSnapshot)).toList());
+
+  @override
   Future<void> deleteMessage({required String id}) async {
     final now = _dateTimeGenerator.nowUtc.toIso8601String();
     await _firebaseFirestore.collection(_collection).doc(id).update({

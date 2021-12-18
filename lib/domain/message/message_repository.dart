@@ -16,6 +16,9 @@ abstract class MessageRepository {
   /// Returns a List of [MessageEntity] by [ids]
   Future<List<MessageEntity>> getMessages({required List<String> ids});
 
+  /// Watches a List of [MessageEntity] by [ids]
+  Stream<List<MessageEntity>> watchMessages({required List<String> ids});
+
   /// Deletes a [MessageEntity] by [id]
   Future<void> deleteMessage({required String id});
 }
