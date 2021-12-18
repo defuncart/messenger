@@ -73,6 +73,10 @@ class ChatRepositoryImpl implements ChatRepository {
   }
 
   @override
+  Stream<ChatEntity> watchChat({required String id}) =>
+      _firebaseFirestore.collection(_collection).doc(id).snapshots().map(_snapshotToEntity);
+
+  @override
   Future<void> deleteChat({required String id}) async {
     final now = _dateTimeGenerator.nowUtc.toIso8601String();
     await _firebaseFirestore.collection(_collection).doc(id).update({

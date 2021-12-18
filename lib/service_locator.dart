@@ -2,8 +2,12 @@ import 'package:get_it/get_it.dart';
 import 'package:messenger/common/repositories/date_time/date_time_generator.dart';
 import 'package:messenger/common/repositories/id/id_generator.dart';
 import 'package:messenger/domain/auth/auth_repository.dart';
+import 'package:messenger/domain/chat/chat_repository.dart';
+import 'package:messenger/domain/message/message_repository.dart';
 import 'package:messenger/domain/user/user_respository.dart';
 import 'package:messenger/infrastructure/auth/auth_repository_impl.dart';
+import 'package:messenger/infrastructure/chat/chat_repository_impl.dart';
+import 'package:messenger/infrastructure/message/message_respository_impl.dart';
 import 'package:messenger/infrastructure/user/user_repository_impl.dart';
 import 'package:meta/meta.dart';
 
@@ -21,6 +25,18 @@ class ServiceLocator {
       ..registerSingleton<UserRepository>(
         UserRepositoryImpl(
           dateTimeGenerator: get<DateTimeGenerator>(),
+        ),
+      )
+      ..registerSingleton<MessageRepository>(
+        MessageRepositoryImpl(
+          dateTimeGenerator: get<DateTimeGenerator>(),
+          idGenerator: get<IdGenerator>(),
+        ),
+      )
+      ..registerSingleton<ChatRepository>(
+        ChatRepositoryImpl(
+          dateTimeGenerator: get<DateTimeGenerator>(),
+          idGenerator: get<IdGenerator>(),
         ),
       );
   }

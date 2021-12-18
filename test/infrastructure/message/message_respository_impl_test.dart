@@ -160,6 +160,43 @@ void main() {
       });
     });
 
+    group('watchMessages', () {
+      const ids = ['id1', 'id2'];
+      final dates = [DateTime(1), DateTime(2)];
+
+      final messages = [
+        for (var i = 0; i < ids.length; i++)
+          TestEntities.message(
+            id: ids[i],
+            createdAt: dates[i],
+          ),
+      ];
+
+      group('when the messages are in the db', () {
+        setUp(() async {
+          for (var i = 0; i < 2; i++) {
+            await fakeFirebaseFirestore.collection('messages').doc(ids[i]).set({
+              'id': ids[i],
+              'text': 'text',
+              'createdBy': 'createdBy',
+              'createdAt': dates[i].toIso8601String(),
+              'updatedAt': null,
+              'deletedAt': null,
+            });
+          }
+        });
+
+        test('expect two messages sorted by createdAt', () {
+          final stream = messageRepositoryImpl.watchMessages(ids: ids);
+
+          expect(
+            stream,
+            emitsInOrder([messages]),
+          );
+        });
+      });
+    });
+
     group('deleteMessage', () {
       const id = 'id';
 

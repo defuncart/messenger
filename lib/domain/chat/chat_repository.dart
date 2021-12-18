@@ -10,6 +10,9 @@ abstract class ChatRepository {
   /// Returns a [ChatEntity] by [id]
   Future<ChatEntity> getChat({required String id});
 
+  /// Watches [ChatEntity] by [id]
+  Stream<ChatEntity> watchChat({required String id});
+
   /// Deletes a [ChatEntity] by [id]
   Future<void> deleteChat({required String id});
 }
